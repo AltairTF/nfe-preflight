@@ -8,3 +8,4 @@ data
 *.db*
 README.md
 site
+fly.toml

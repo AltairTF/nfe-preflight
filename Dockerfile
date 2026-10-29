@@ -22,7 +22,7 @@ RUN node scripts/build-site.ts
 ENV PORT=3000 DB_FILE=/data/nfe-preflight.db
 RUN mkdir /data && chown node:node /data
 VOLUME /data
-USER node
 EXPOSE 3000
 
-CMD ["node", "src/server.ts"]
+# Starts as root only to chown the volume (Fly mounts it root-owned), then drops to `node`.
+CMD ["sh", "-c", "chown node:node /data && exec setpriv --reuid=node --regid=node --init-groups node src/server.ts"]
