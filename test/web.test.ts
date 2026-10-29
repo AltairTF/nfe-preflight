@@ -20,7 +20,7 @@ async function start() {
   return { server, base: `http://127.0.0.1:${(server.address() as AddressInfo).port}` };
 }
 
-test("serves the page and its assets without an API key", async () => {
+test("serves the page and its assets", async () => {
   const { server, base } = await start();
   for (const [path, type] of [["/", "text/html"], ["/app.js", "text/javascript"], ["/app.css", "text/css"]]) {
     const res = await fetch(base + path);
@@ -31,7 +31,7 @@ test("serves the page and its assets without an API key", async () => {
   server.close();
 });
 
-test("/v1/try validates anonymously, is limited per IP and is not billed", async () => {
+test("/v1/try validates anonymously, is limited per IP", async () => {
   const { server, base } = await start();
   const call = () => fetch(`${base}/v1/try`, { method: "POST", body: valid });
   const first = await call();
@@ -43,9 +43,9 @@ test("/v1/try validates anonymously, is limited per IP and is not billed", async
   server.close();
 });
 
-test("/v1/validate still needs a key", async () => {
+test("the old key-based API is gone", async () => {
   const { server, base } = await start();
-  assert.equal((await fetch(`${base}/v1/validate`, { method: "POST", body: valid })).status, 401);
+  for (const [m, p] of [["POST", "/v1/validate"], ["GET", "/v1/usage"]]) assert.equal((await fetch(base + p, { method: m, body: m === "POST" ? valid : undefined })).status, 404, p);
   server.close();
 });
 

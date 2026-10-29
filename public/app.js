@@ -1,12 +1,5 @@
 "use strict";
 const $ = (id) => document.getElementById(id);
-const store = {
-  get: (k) => { try { return localStorage.getItem(k) || ""; } catch { return ""; } },
-  set: (k, v) => { try { localStorage.setItem(k, v); } catch { /* private mode: key just isn't remembered */ } },
-};
-
-$("key").value = store.get("nfp_key");
-
 $("file").addEventListener("change", (e) => load(e.target.files[0]));
 const drop = $("drop");
 for (const ev of ["dragenter", "dragover"]) drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); });
@@ -22,7 +15,6 @@ async function load(file) {
 }
 
 const ERRORS = {
-  401: "Chave de API inválida.",
   413: "Arquivo grande demais (limite de 2 MB).",
   500: "Falha interna ao validar. Tente de novo em instantes.",
 };
@@ -30,20 +22,14 @@ const ERRORS = {
 async function validate() {
   const xml = $("xml").value;
   if (!xml.trim()) return show("bad", "Cole ou envie um XML primeiro.", [], "");
-  const key = $("key").value.trim();
-  store.set("nfp_key", key);
   $("go").disabled = true;
   try {
-    const res = await fetch(key ? "/v1/validate" : "/v1/try", {
-      method: "POST",
-      body: xml,
-      headers: key ? { authorization: `Bearer ${key}` } : {},
-    });
+    const res = await fetch("/v1/try", { method: "POST", body: xml });
     const body = await res.json().catch(() => ({}));
     if (res.status === 429) {
       const wait = res.headers.get("retry-after");
       const quota = body.error === "quota_exceeded";
-      return show("bad", quota ? "Cota do mês esgotada." : `Muitas validações seguidas. Tente de novo em ${wait || "alguns"} s.`, [], "");
+      return show("bad", quota ? "Limite de validações do mês esgotado." : `Muitas validações seguidas. Tente de novo em ${wait || "alguns"} s.`, [], "");
     }
     if (!res.ok) return show("bad", ERRORS[res.status] || "Erro inesperado.", [], "");
     show(body.valid ? "ok" : "bad", body.valid ? "Nenhum problema encontrado." : `${body.issues.length} problema(s) encontrado(s).`, body.issues, xml, body.valid);

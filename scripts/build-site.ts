@@ -36,7 +36,7 @@ ${o.jsonld ? `<script type="application/ld+json">${JSON.stringify(o.jsonld).repl
 </head>
 <body>
 <main>
-<p class="nav"><a href="/">Validar XML</a> | <a href="/docs/">Documentação</a> | <a href="/rejeicoes/">Rejeições</a> | <a href="/docs/api/">API</a></p>
+<p class="nav"><a href="/">Validar XML</a> | <a href="/docs/">Documentação</a> | <a href="/rejeicoes/">Rejeições</a></p>
 ${o.body}
 ${donateUrl ? `<p class="donate">Este validador é grátis e mantido por uma pessoa só. Se ele te ajudou, <a href="${esc(donateUrl)}" target="_blank" rel="noopener noreferrer">ajude a pagar o servidor</a>.</p>` : ""}
 <footer>
@@ -79,12 +79,7 @@ ${path === "/" ? '<script src="/app.js"></script>' : ""}
 <button id="go" type="button">Validar</button>
 <button id="clear" type="button" class="ghost">Limpar</button>
 </div>
-<details>
-<summary>Tenho uma chave de API</summary>
-<label for="key" class="sub">Chave (fica só neste navegador)</label>
-<input id="key" type="password" autocomplete="off" placeholder="nfp_…">
-</details>
-<p class="note">O XML é validado e não é armazenado. Sem chave, o uso é limitado por IP.</p>
+<p class="note">O XML é validado e não é armazenado. O uso é limitado por IP.</p>
 </section>
 
 <section class="card" id="result" aria-live="polite" hidden>
@@ -106,7 +101,7 @@ ${path === "/" ? '<script src="/app.js"></script>' : ""}
 <li><strong>Regras do IBS e da CBS:</strong> alíquotas, cálculo de valores e totais, CST e cClassTrib, diferimento, redução, crédito presumido, ZFM e ALC, conforme a NT 2025.002-RTC.</li>
 <li><strong>Chave de acesso:</strong> composição e dígito verificador.</li>
 </ul>
-<p>Cada problema aparece com a linha do XML e o código de rejeição da SEFAZ. Veja a lista em <a href="/rejeicoes/">Rejeições da NF-e (${codes.length} códigos)</a> e como usar por programa em <a href="/docs/api/">API</a>.</p>
+<p>Cada problema aparece com a linha do XML e o código de rejeição da SEFAZ. Veja a lista em <a href="/rejeicoes/">Rejeições da NF-e (${codes.length} códigos)</a>.</p>
 </section>`,
   });
 
@@ -116,7 +111,6 @@ ${path === "/" ? '<script src="/app.js"></script>' : ""}
     description: "Como usar o NF-e Preflight, guia das regras de IBS/CBS na NF-e e lista de códigos de rejeição com o texto oficial da NT 2025.002.",
     body: `<h1>Documentação</h1>
 <ul>
-<li><a href="/docs/api/"><strong>API</strong></a>: validar XML por programa, com chave.</li>
 <li><a href="/docs/ibs-cbs/"><strong>IBS e CBS na NF-e</strong></a>: o que muda no XML e o que o validador confere.</li>
 <li><a href="/rejeicoes/"><strong>Rejeições</strong></a>: ${codes.length} códigos com o texto oficial da regra.</li>
 </ul>
@@ -126,45 +120,6 @@ ${path === "/" ? '<script src="/app.js"></script>' : ""}
 <li><a href="https://dfe-portal.svrs.rs.gov.br/Nfe/Documentos" target="_blank" rel="noopener noreferrer">Portal SVRS: documentos da NF-e</a> (notas técnicas e tabelas)</li>
 </ul>
 <p>Este site resume e cita os documentos oficiais. Em caso de divergência vale o documento da SEFAZ.</p>`,
-  });
-
-  page("/docs/api/", {
-    title: "API de validação de NF-e | NF-e Preflight",
-    description: "Envie o XML da NF-e por HTTP e receba a lista de problemas com linha e código de rejeição. Exemplo com curl, formato da resposta e erros.",
-    body: `<h1>API de validação</h1>
-<p>Envie o XML cru no corpo da requisição e receba os problemas encontrados.</p>
-<h2>POST /v1/validate</h2>
-<pre class="pre">curl -X POST ${esc(base)}/v1/validate \\
-  -H "Authorization: Bearer nfp_SUACHAVE" \\
-  --data-binary @nota.xml</pre>
-<p>Também vale o cabeçalho <code>x-api-key: nfp_SUACHAVE</code>. Resposta:</p>
-<pre class="pre">{
-  "valid": false,
-  "issues": [
-    { "rule": "1069", "line": 62, "message": "Rejeição: Valor da CBS difere do calculado [nItem: 1]" }
-  ]
-}</pre>
-<ul>
-<li><code>rule</code>: código de rejeição da SEFAZ (veja a <a href="/rejeicoes/">lista</a>) ou <code>XSD</code> para erro de estrutura.</li>
-<li><code>line</code>: linha do XML. Pode faltar quando a regra aponta para um grupo ausente.</li>
-<li><code>valid</code> é <code>true</code> só quando <code>issues</code> está vazio.</li>
-<li>As regras de negócio só rodam quando a estrutura (XSD) passa.</li>
-</ul>
-<h2>GET /v1/usage</h2>
-<p>Mostra o consumo do mês: <code>{ "client": "...", "used": 42, "perMonth": 1000 }</code>.</p>
-<h2>Cobrança</h2>
-<p>Só validações cujo XML volta <strong>válido</strong> contam na cota do mês. XML rejeitado não é cobrado, para você poder corrigir e tentar de novo. Há um teto de uso justo para o total de chamadas.</p>
-<h2>Erros</h2>
-<table>
-<tr><th>Status</th><th><code>error</code></th><th>Significado</th></tr>
-<tr><td>401</td><td>unauthorized</td><td>Chave ausente ou inexistente</td></tr>
-<tr><td>403</td><td>access_revoked</td><td>Chave revogada ou cliente suspenso</td></tr>
-<tr><td>413</td><td>payload_too_large</td><td>XML acima de 2 MB</td></tr>
-<tr><td>429</td><td>rate_limited</td><td>Limite por minuto; veja o cabeçalho <code>Retry-After</code> (segundos)</td></tr>
-<tr><td>429</td><td>quota_exceeded</td><td>Cota do mês esgotada</td></tr>
-<tr><td>429</td><td>fair_use_exceeded</td><td>Total de chamadas do mês acima do teto de uso justo</td></tr>
-<tr><td>500</td><td>validator_failed</td><td>Falha ao validar</td></tr>
-</table>`,
   });
 
   page("/docs/ibs-cbs/", {
@@ -246,9 +201,8 @@ ${r.entries.map((e) => `<h3>${esc(e.rv)} <span class="note">modelo ${esc(e.model
 <p>O XML é lido na memória do servidor, validado e descartado. Ele não é gravado em banco, em arquivo nem em registro de acesso.</p>
 <h2>O que é guardado</h2>
 <ul>
-<li><strong>Clientes com chave de API:</strong> nome, e-mail, plano, o resumo irreversível da chave e, para cada validação, a data e hora e se o XML estava válido. Isso serve para controlar a cota e a cobrança.</li>
-<li><strong>Uso sem chave:</strong> o endereço IP é usado só para limitar o número de tentativas e fica na memória do servidor, sem ser gravado.</li>
-<li><strong>No seu navegador:</strong> se você informar uma chave de API na página, ela fica somente no seu navegador (armazenamento local). O site não usa cookies de rastreamento nem ferramentas de análise de terceiros.</li>
+<li><strong>Limite de uso:</strong> o endereço IP é usado só para limitar o número de tentativas e fica na memória do servidor, sem ser gravado.</li>
+<li><strong>No seu navegador:</strong> o site não usa cookies de rastreamento nem ferramentas de análise de terceiros.</li>
 <li><strong>Contadores anônimos:</strong> o servidor soma quantas validações foram feitas na página, sem guardar IP nem qualquer identificador.</li>
 </ul>
 <h2>Relatórios</h2>

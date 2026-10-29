@@ -66,7 +66,6 @@ table.form th { width: 180px; background: #f6f7f8; }
 .err { padding: 8px 10px; background: #fbeaea; border: 1px solid #d29a9a; color: #8a1c1c; }
 .tag { padding: 1px 6px; background: #8a1c1c; color: #fff; font: bold 12px Arial; vertical-align: middle; }
 form.inline { display: inline; }
-input.key { font-size: 14px; }
 @media (max-width: 560px) { #issues li { flex-wrap: wrap; } main, #wrap { border: 0; } th, td { padding: 4px; } }
 
 /* Public pages */
