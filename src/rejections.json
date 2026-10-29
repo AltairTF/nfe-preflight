@@ -1,0 +1,910 @@
+{
+ "253": {
+  "message": "Rejeição: Digito Verificador da chave de acesso composta inválida",
+  "entries": [
+   {
+    "rv": "B23-10",
+    "model": "55/65",
+    "src": "MOC 7.0 Anexo I",
+    "rule": "Chave de Acesso obtida pela concatenação dos campos correspondentes com dígito verificador (DV) inválido"
+   }
+  ]
+ },
+ "502": {
+  "message": "Rejeição: Erro na Chave de Acesso - Campo Id não corresponde à concatenação dos campos correspondentes",
+  "entries": [
+   {
+    "rv": "A03-10",
+    "model": "55/65",
+    "src": "MOC 7.0 Anexo I",
+    "rule": "Campo Id inválido: - Chave de Acesso do campo Id difere da concatenação dos campos correspondentes. Observação: No caso da Nota Fiscal Avulsa da Série 890-899, considerar o CNPJ da SEFAZ para a UF correspondente. Nos demais casos, considerar o CNPJ/CPF do emitente. (NT 2018.001)"
+   }
+  ]
+ },
+ "1007": {
+  "message": "Rejeição: CST do IBS/CBS informado não permite informação de redução de alíquota municipal [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB45-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se CST possui indicador que não permite o uso de Redução de Alíquota (ind_gRed = 0): - Grupo de Redução de Alíquota Informado indevidamente (grupo: gIBSMun/gRed) Exceção: Percentual de redução da alíquota em compra governamental (tag:gCompraGov/pRedutor) informado e gIBSMun/gRed/pRedAliq igual a zero. Observação: Consultar Tabela de Indicadores de CST do IBS e CBS."
+   }
+  ]
+ },
+ "1020": {
+  "message": "Rejeição: CST do IBS/CBS informado inexistente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB13-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informada a tag CST do IBS/CBS (tag: IBSCBS/CST): - CST inexistente"
+   }
+  ]
+ },
+ "1021": {
+  "message": "Rejeição: Grupo gIBSCBS informado indevidamente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB13-20",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se CST do IBS/CBS (tag: IBSCBS/CST) informado possui indicador que não permite a informação do IBS/CBS (ind_gIBSCBS = 0): - Grupo gIBSCBS informado indevidamente (id: UB15, grupo: imposto/IBSCBS/gIBSCBS) Observação 1: Consultar Tabela de Indicadores de CST do IBS e da CBS."
+   }
+  ]
+ },
+ "1022": {
+  "message": "Rejeição: Grupo gIBSCBS não informado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB13-30",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se CST do IBS/CBS (tag: IBSCBS/CST) informado possui indicador que exige informação do IBS/CBS (ind_gIBSCBS = 1): - Grupo gIBSCBS não informado (id: UB15, grupo: imposto/IBSCBS/gIBSCBS) Exceção: Esta RV não se aplica no caso de tpNFDebito=07-Perda em estoque. Observação 1: Consultar Tabela de Indicadores de CST do IBS e da CBS."
+   }
+  ]
+ },
+ "1023": {
+  "message": "Rejeição: Classificação Tributária do IBS/CBS informada inexistente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB14-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se cClassTrib (id: UB14, tag: IBSCBS/cClassTrib) for informado: - cClassTrib inexistente"
+   }
+  ]
+ },
+ "1024": {
+  "message": "Rejeição: Classificação Tributária do IBS e da CBS incompatível com o CST informado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB14-20",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se cClassTrib (id: UB14, tag: IBSCBS/cClassTrib) for informado: - cClassTrib incompatível com CST (tag: IBSCBS/CST) Observação: Consultar Tabela de Código de Classificação Tributária do IBS e CBS."
+   }
+  ]
+ },
+ "1025": {
+  "message": "Rejeição: cClassTrib do IBS/CBS não permitido neste modelo de DFe [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB14-25",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informada tag cClassTrib do IBS/CBS (tag: IBSCBS/cClassTrib): - cClassTrib informado possui indicador que não permite ser utilizado no respectivo modelo de DFe (indNFe = 0 para modelo 55 e indNFCe = 0 para modelo 65): Observação 1: Consultar Tabela de Indicadores de cClassTrib do IBS e CBS."
+   }
+  ]
+ },
+ "1026": {
+  "message": "Rejeição: Alíquota do IBS da UF inválida [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB18-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo de IBS Estadual (gIBSUF): A alíquota de IBS da UF (pIBSUF) deverá ser: - 0,1% para documento com data de emissão no ano de 2025 e 2026. (Art. 343 da LC 214/25); - 0,05% para documento com data de emissão no ano de 2027 e 2028. (Art. 344 da LC 214/25); - Alíquota de referência ou específica a ser publicada para anos posteriores a 2028. Exceção 1: Se o cClassTrib possuir indicador de Tributação Regular, o pIBSUF deve ser igual a zero. Exceção 2: A regra não se aplica caso tpNFCredito=04-Redução de valores. Exceção 2: A regra não se aplica caso: - Finalidade de devolução de mercadoria (tag: finNFe=4); - ou Nota de Crédito do tipo “03=Retorno por Recusa Total” (tag: tpNFCredito=03); - ou Nota de Crédito do tipo “04=Redução de valores” (tag: tpNFCredito=04); - ou Nota de Crédito do tipo “06=Retorno por Recusa Parcial” (tag: tpNFCredito=06)."
+   }
+  ]
+ },
+ "1028": {
+  "message": "Rejeição: CST do IBS/CBS informado não permite informação de redução de alíquota da CBS [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB64-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se CST possui indicador que não permite o uso de redução de alíquota (ind_gRed = 0): - Grupo de Redução de Alíquota da CBS informado indevidamente (grupo: gCBS/gRed) Exceção: Percentual de redução da alíquota em compra governamental (tag:gCompraGov/pRedutor) informado e gCBS/gRed/pRedAliq igual a zero. Observação: Consultar Tabela de Indicadores de CST do IBS e CBS."
+   }
+  ]
+ },
+ "1029": {
+  "message": "Rejeição: CST do IBS/CBS informado não permite informação de diferimento Estadual [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB22-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se CST possui indicador que não permite o uso de diferimento (ind_gDif = 0): - Grupo de Diferimento informado indevidamente (grupo: gIBSUF/gDif) Observação: Consultar Tabela de Indicadores de CST do IBS e CBS."
+   }
+  ]
+ },
+ "1030": {
+  "message": "Rejeição: CST do IBS/CBS informado obriga informação de diferimento Estadual [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB22-20",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo gIBSCBS (id: UB15, grupo: imposto/IBSCBS/gIBSCBS): - Se CST possui indicador que exige o uso de diferimento (ind_gDif = 1): - Grupo de Diferimento não informado (grupo: gIBSUF/gDif) Observação: Consultar Tabela de Indicadores de CST do IBS e CBS."
+   }
+  ]
+ },
+ "1031": {
+  "message": "Rejeição: Valor do Diferimento da UF difere do calculado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB23-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo do Diferimento (gIBSUF/gDif): - Valor do Diferimento (vDif) deverá ser resultante da Base de Cálculo x Percentual do IBS da UF x Percentual do Diferimento: vDif = vBC x (pIBSUF / 100) x (pDif / 100) Observação 1: Aceitar uma tolerância de 0,01 a mais ou a menos Observação 2: Em caso de preenchimento do grupo de redução (gIBSUF/gRed) a alíquota utilizada deverá ser a tag Alíquota Efetiva (gIBSUF/gRed/pAliqEfet) ao invés do pIBSUF."
+   }
+  ]
+ },
+ "1032": {
+  "message": "Rejeição: CST do IBS/CBS informado não permite informação de redução de alíquota Estadual [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB26-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se CST possui indicador que não permite o uso de Redução de Alíquota (ind_gRed = 0): - Grupo de Redução de Alíquota informado (grupo: gIBSUF/gRed) Exceção: Percentual de redução da alíquota em compra governamental (tag:gCompraGov/pRedutor) informado e gIBSUF/gRed/pRedAliq igual a zero. Observação: Consultar Tabela de Indicadores de CST do IBS e CBS."
+   }
+  ]
+ },
+ "1033": {
+  "message": "Rejeição: Não informado o grupo de redução de alíquota Estadual [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB26-20",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo gIBSCBS (id: UB15, grupo: imposto/IBSCBS/gIBSCBS): - Se CST possui indicador que exige o uso de Redução de Alíquota (ind_gRed = 1), ou foi informado o grupo de compras governamentais (tag:gCompraGov): - Grupo de Redução de Alíquota Estadual não informado (grupo: gIBSUF/gRed) Exceção: A regra não se aplica para CST do IBS/CBS (tag: IBSCBS/CST) que possui indicador que não permite a informação do IBS/CBS (ind_gIBSCBS = 0). Observação: Consultar Tabela de Indicadores de CST do IBS e CBS."
+   }
+  ]
+ },
+ "1035": {
+  "message": "Rejeição: Valor da Alíquota Efetiva do IBS da UF calculado incorretamente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB28-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo de Redução de Alíquota (gIBSUF/gRed): - Alíquota Efetiva (tag: pAliqEfet) deve ser o resultado de: - Se NÃO houver compra governamental (grupo gCompraGov não informado): pAliqEfet = pIBSUF × (1 - pRedAliq / 100). - Se houver compra governamental (grupo gCompraGov informado): pAliqEfet = pIBSUF × (1 - pRedAliq / 100) × (1 - gCompraGov/pRedutor / 100). Exemplo: Redução de 40% na alíquota: Alíquota vigente (A): 10% Redução na alíquota (R): 40% Redutor de compras governamentais (RG): 5% Alíquota Efetiva (E): E = A * (1 - R) * (1 - RG) E = 10 * (1 - 0,4) * (1 - 0,05) = 5,7 Observação: O cálculo da pAliqEfet deve considerar 4 casas decimais, com arredondamento na última casa decimal."
+   }
+  ]
+ },
+ "1036": {
+  "message": "Rejeição: Alíquota do IBS do Município inválida [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB37-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo de IBS Municipal (gIBSMun): A alíquota de IBS do Município (pIBSMun) deverá ser: - 0% para documento com data de emissão no ano de 2025 e 2026. (Art. 343 da LC 214/25); - 0,05% para documento com data de emissão no ano de 2027 e 2028. (Art. 344 da LC 214/25); - Alíquota de referência ou específica a ser publicada para anos posteriores a 2028. Exceção 1: Se o cClassTrib possuir indicador de Tributação Regular, o pIBSMun deve ser igual a zero. Exceção 2: A regra não se aplica caso tpNFCredito=04-Redução de valores. Exceção 2: A regra não se aplica caso: - Finalidade de devolução de mercadoria (tag: finNFe=4); - ou Nota de Crédito do tipo “03=Retorno por Recusa Total” (tag: tpNFCredito=03); - ou Nota de Crédito do tipo “04=Redução de valores” (tag: tpNFCredito=04); - ou Nota de Crédito do tipo “06=Retorno por Recusa Parcial” (tag: tpNFCredito=06)."
+   }
+  ]
+ },
+ "1037": {
+  "message": "Rejeição: Alíquota da CBS inválida [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB56-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Alíquota da CBS (tag: pCBS) deve ser igual a 0,9% para documento com data de emissão no ano de 2025 e 2026. Art. 346 da LC 214/2025. Exceção 1: Se o cClassTrib possuir indicador de Tributação Regular (ind_gTribRegular = 1), o pCBS deve ser igual a zero. Exceção 2: A regra não se aplica caso tpNFCredito=04-Redução de valores. Exceção 3: A Alíquota da CBS (tag: pCBS) pode ser igual a zero quando as duas condições abaixo forem atendidas: Condição 01: NCM do Produto (tag: prod/NCM) NÃO inicia por: a) 93 (armas e munições); b) 24 (fumos e derivados); c) 2203 a 2208 (bebidas alcoólicas); d) 8703 (automóveis de passageiros); e) 33, exceto 3303 a 3307 (produtos de perfumaria ou de toucador). Condição 02: Emitente e destinatário devem estar na mesma área incentivada (ou seja, emitente e destinatário dentro da ZFM, ou emitente e destinatário na mesma ALC), conforme relação abaixo: - ZFM: 1302603-Manaus, 1303569-Rio Preto da Eva, 1301902-Itacoatiara - ALC: conforme tabela abaixo: Município Emitente Município Destinatário ZFM 1301902-Itacoatiara (AM) 1301902-Itacoatiara (AM) Observação: Alíquota de referência a ser publicada para anos posteriores a 2026."
+   },
+   {
+    "rv": "UB56-20",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "A partir de 2027, a alíquota da CBS (tag: pCBS) deve ser igual a alíquota vigente para o período conforme legislação. Exceção 1: Se o cClassTrib possuir indicador de Tributação Regular (ind_gTribRegular = 1), o pCBS deve ser igual a zero. Exceção 2: A regra não se aplica caso tpNFCredito=04-Redução de valores. Exceção 2: A regra não se aplica caso: - Finalidade de devolução de mercadoria (tag: finNFe=4); - ou Nota de Crédito do tipo “03=Retorno por Recusa Total” (tag: tpNFCredito=03); - ou Nota de Crédito do tipo “04=Redução de valores” (tag: tpNFCredito=04); - ou Nota de Crédito do tipo “06=Retorno por Recusa Parcial” (tag: tpNFCredito=06). Exceção 3: Se o grupo gALCZFMCBS estiver preenchido, o pCBS deve ser igual a zero. Observação: Consultar Tabela de Alíquotas da CBS."
+   }
+  ]
+ },
+ "1041": {
+  "message": "Rejeição: Valor do IBS da UF difere do calculado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB35-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo IBS de competência das Unidades Federadas (gIBSUF): - Valor do IBS Estadual (vIBSUF) deverá ser resultante de: vIBSUF = (gIBSCBS/vBC x (pIBSUF / 100)) - vDif - vDevTrib Observação 1: Aceitar uma tolerância de 0,01 a mais ou a menos Observação 2: Em caso de preenchimento do grupo de redução (gIBSUF/gRed) a alíquota utilizada deverá ser a tag Alíquota Efetiva (gIBSUF/gRed/pAliqEfet): vIBSUF = (gIBSCBS/vBC x (pAliqEfet / 100)) - vDif - vDevTrib"
+   }
+  ]
+ },
+ "1043": {
+  "message": "Rejeição: Índice de mistura do Biocombustível inferior ao obrigatório para esta Classificação Tributária do IBS e CBS [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB14-30",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se cClassTrib (id: UB14, tag: IBSCBS/cClassTrib) for igual a 620004: - Percentual do índice de mistura do Etanol Anidro na Gasolina C (id: LA17, tag: comb/pBio) deve ser superior ao obrigatório correspondende ao respectivo código ANP (tag: cProdANP), observado o art. 179 IIa da LC 214/2025 Observação 1: Consultar Tabela de Código de Classificação Tributária do IBS e CBS. Observação 2: Consultar Tabela Índice de mistura do Biocombustível publicada na aba “Documentos”, opção “Diversos” do Portal Nacional da Nota Fiscal Eletrônica."
+   }
+  ]
+ },
+ "1044": {
+  "message": "Rejeição: CST do IBS/CBS informado obriga informação de diferimento Municipal [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB40-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo gIBSCBS (id: UB15, grupo: imposto/IBSCBS/gIBSCBS): - Se CST possui indicador que exige o uso de diferimento (ind_gDif =1): - Grupo de Diferimento não informado (grupo: gIBSMun/gDif) Observação: Consultar Tabela de Indicadores de CST do IBS e CBS."
+   }
+  ]
+ },
+ "1045": {
+  "message": "Rejeição: Valor do Diferimento do Município difere do calculado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB42-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo do Diferimento (gIBSMun/gDif): - Valor do Diferimento (vDif) deverá ser resultante da Base de Cálculo x Percentual do IBS do Município x Percentual do Diferimento: vDif = vBC x (pIBSMun / 100) x (pDif / 100) Observação 1: Aceitar uma tolerância de 0,01 a mais ou a menos. Observação 2: Em caso de preenchimento do grupo de redução (gIBSMun/gRed) a alíquota utilizada deverá ser a tag Alíquota Efetiva (gIBSMun/gRed/pAliqEfet) ao invés do pIBSMun."
+   }
+  ]
+ },
+ "1047": {
+  "message": "Rejeição: Valor da Alíquota Efetiva do IBS do Município calculado incorretamente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB47-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo de Redução de Alíquota (gIBSMun/gRed): - Alíquota Efetiva (tag: pAliqEfet) deve ser igual ao resultado de: - Se NÃO houver compra governamental (grupo gCompraGov não informado): pAliqEfet = pIBSMun × (1 - pRedAliq / 100). - Se houver compra governamental (grupo gCompraGov informado): pAliqEfet = pIBSMun × (1 - pRedAliq / 100) × (1 - gCompraGov/pRedutor / 100). Exemplo: Redução de 40% na alíquota: Alíquota vigente (A): 10% Redução na alíquota (R): 40% Redutor de compras governamentais (RG): 5% Alíquota Efetiva (E): E = A * (1 - R)*(1-RG) E = 10 * (1 - 0,4) *(1-0,05) = 5,7 Observação: O cálculo da pAliqEfet deve considerar 4 casas decimais, com arredondamento na última casa decimal."
+   }
+  ]
+ },
+ "1049": {
+  "message": "Rejeição: Não é permitido o uso de Crédito Presumido na NFC-e modelo 65 [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB120-10",
+    "model": "65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo de Crédito Presumido da Operação (tag: IBSCBS/gCredPresOper): - Modelo DFe = 65-NFCe"
+   }
+  ]
+ },
+ "1050": {
+  "message": "Rejeição: Crédito Presumido para a CBS informado indevidamente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB127-10",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se cCredPres (id: UB122) possui indicador que não permite o uso de crédito presumido para a CBS (ind_gCBSCredPres = 0): - Crédito presumido para a CBS informado indevidamente (grupo: IBSCBS/gCredPresOper/gCBSCredPres) Observação 01: Consultar Tabela de Crédito Presumido do IBS e da CBS."
+   }
+  ]
+ },
+ "1052": {
+  "message": "Rejeição: Valor do IBS Municipal difere do calculado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB54-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo IBS de competência do Município (gIBSMun): - Valor do IBS Municipal (vIBSMun) deverá ser resultante de: vIBSMun = (gIBSCBS/vBC x (pIBSMun / 100)) - vDif - vDevTrib Observação 1: Aceitar uma tolerância de 0,01 a mais ou a menos. Observação 2: Em caso de preenchimento do grupo de redução (gIBSMun/gRed) a alíquota utilizada deverá ser a tag Alíquota Efetiva (gIBSMun/gRed/pAliqEfet): vIBSMun = (gIBSCBS/vBC x (pAliqEfet / 100)) - vDif – vDevTrib"
+   }
+  ]
+ },
+ "1053": {
+  "message": "Rejeição: Crédito Presumido para o IBS informado indevidamente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB123-10",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se cCredPres (id: UB122) possui indicador que não permite o uso de crédito presumido para o IBS (ind_gIBSCredPres = 0): - Crédito presumido para o IBS informado indevidamente (grupo: IBSCBS/gCredPresOper/gIBSCredPres) Observação 01: Consultar Tabela de Crédito Presumido do IBS e da CBS."
+   }
+  ]
+ },
+ "1054": {
+  "message": "Rejeição: Crédito Presumido para o IBS não informado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB123-20",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se cCredPres (id: UB122) possui indicador que exige o uso de crédito presumido para o IBS (ind_gIBSCredPres = 1): - Crédito presumido para o IBS não informado (grupo: IBSCBS/gCredPresOper/gIBSCredPres) Observação 01: Consultar Tabela de Crédito Presumido do IBS e da CBS."
+   }
+  ]
+ },
+ "1055": {
+  "message": "Rejeição: Código de Crédito Presumido (cCredPres) da Operação inexistente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB122-10",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado cCredPres da operação (tag: IBSCBS/gCredPresOper/cCredPres, id: UB122): - cCredPres inexistente Observação: Consultar tabela de Crédito Presumido do IBS e da CBS."
+   }
+  ]
+ },
+ "1056": {
+  "message": "Rejeição: Valor do Crédito Presumido em condição suspensiva do IBS informado indevidamente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB126-10",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado Valor do Crédito Presumido em condição suspensiva (tag:gIBSCredPres/vCredPresCondSus): - Ano de emissão < 2033; ou - Código de classificação do crédito presumido (tag: gIBSCredPres/cCredPres) <> “4- Aquisição de bens móveis de PF não contrib. para revenda (exemplo: veículos / brechó)” Observação: Somente deverá ser informado a partir de 2033."
+   }
+  ]
+ },
+ "1058": {
+  "message": "Rejeição: Crédito Presumido para a CBS não informado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB127-20",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se cCredPres (id: UB122) possui indicador que exige o uso de crédito presumido para a CBS (ind_gCBSCredPres = 1): - Crédito presumido para a CBS não informado (grupo: IBSCBS/gCredPresOper/gCBSCredPres) Observação 01: Consultar Tabela de Crédito Presumido do IBS e da CBS."
+   }
+  ]
+ },
+ "1059": {
+  "message": "Rejeição: Índice de mistura do Biocombustível superior ao obrigatório para esta Classificação Tributária do IBS e CBS [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB14-50",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se cClassTrib (id: UB14, tag: IBSCBS/cClassTrib) for igual a 620005: - Percentual do índice de mistura do Etanol Anidro na Gasolina C (id: LA17, tag: comb/pBio) deve ser inferior ao obrigatório correspondende ao respectivo código ANP (tag: cProdANP), observado o art. 179 IIb da LC 214/2025 Observação 1: Consultar Tabela de Código de Classificação Tributária do IBS e CBS. Observação 2: Consultar Tabela Índice de mistura do Biocombustível publicada na aba “Documentos”, opção “Diversos” do Portal Nacional da Nota Fiscal Eletrônica."
+   }
+  ]
+ },
+ "1060": {
+  "message": "Rejeição: Valor do Crédito Presumido da CBS informado indevidamente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB130-10",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado Valor do Crédito Presumido em condição suspensiva (tag:gCBSCredPres/vCredPresCondSus): - Ano de emissão < 2027; ou - Código de classificação do crédito presumido (tag: gCBSCredPres/cCredPres) <> “4- Aquisição de bens móveis de PF não contrib. para revenda (veículos / brechó)” Observação: Somente deverá ser informado a partir de 2027."
+   }
+  ]
+ },
+ "1061": {
+  "message": "Rejeição: CST do IBS/CBS informado obriga informação de diferimento da CBS [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB59-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo gIBSCBS (id: UB15, grupo: imposto/IBSCBS/gIBSCBS): - Se CST possui indicador que exige o uso de diferimento (ind_gDif = 1): - Grupo de Diferimento não informado (grupo: gCBS/gDif) Observação: Consultar Tabela de Indicadores de CST do IBS e CBS."
+   }
+  ]
+ },
+ "1062": {
+  "message": "Rejeição: Valor do Diferimento da CBS difere do calculado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB61-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo do Diferimento (gCBS/gDif): - Valor do Diferimento (vDif) deverá ser resultante da Base de Cálculo x Percentual da CBS x Percentual do Diferimento: vDif = vBC x (pCBS / 100) x (pDif / 100) Observação 1: Aceitar uma tolerância de 0,01 a mais ou a menos. Observação 2: Em caso de preenchimento do grupo de redução (gCBS/gRed) a alíquota utilizada deverá ser a tag Alíquota Efetiva (gCBS/gRed/pAliqEfet) ao invés da pCBS."
+   }
+  ]
+ },
+ "1064": {
+  "message": "Rejeição: Valor da Alíquota Efetiva da CBS calculado incorretamente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB66-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo de Redução de Alíquota (gCBS/gRed): - Alíquota Efetiva (tag: pAliqEfet) deve ser o resultado de: - Se NÃO houver compra governamental (grupo gCompraGov não informado): pAliqEfet = pCBS × (1 - pRedAliq / 100). - Se houver compra governamental (grupo gCompraGov informado): pAliqEfet = pCBS × (1 - pRedAliq / 100) × (1 - gCompraGov/pRedutor / 100). Exemplo: Redução de 40% na alíquota: Alíquota vigente (A): 10% Redução na alíquota (R): 40% Redutor de compras governamentais (RG): 5% Alíquota Efetiva (E): E = A * (1 - R)*(1-RG) E = 10 * (1 - 0,4) *(1-0,05) = 5,7 Observação: O cálculo da pAliqEfet deve considerar 4 casas decimais, com arredondamento na última casa decimal."
+   }
+  ]
+ },
+ "1065": {
+  "message": "Rejeição: Classificação Tributária do IBS e da CBS informada obriga informação da tributação regular [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB68-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se não informado grupo da Tributação Regular (gIBSCBS/gTribRegular): - Informado cClassTrib (tag: IBSCBS/cClassTrib) com indicador que exige informação do grupo de Tributação Regular (ind_gTribRegular = 1) Observação: Consultar Tabela de Código de Classificação Tributária do IBS e CBS."
+   }
+  ]
+ },
+ "1066": {
+  "message": "Rejeição: CST do IBS e da CBS informado no grupo de tributação regular inexistente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB69-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo da Tributação Regular (gIBSCBS/gTribRegular): - CST Regular (tag: gTribRegular/CSTReg) inexistente Observação: Consultar Tabela de Indicadores de CST do IBS e CBS."
+   }
+  ]
+ },
+ "1067": {
+  "message": "Rejeição: Classificação Tributária do IBS e da CBS informada no grupo de tributação regular inexistente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB70-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo da Tributação Regular (gIBSCBS/gTribRegular): - cClassTrib Regular (tag: gTribRegular/cClassTribReg) inexistente Observação: Consultar Tabela de Código de Classificação Tributária do IBS e CBS."
+   }
+  ]
+ },
+ "1069": {
+  "message": "Rejeição: Valor da CBS difere do calculado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB67-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo CBS (gCBS): - Valor da CBS (vCBS) deverá ser resultante de: vCBS = (gIBSCBS/vBC x (pCBS / 100)) - vDif - vDevTrib Observação 1: Aceitar uma tolerância de 0,01 a mais ou a menos. Observação 2: Se informado grupo de redução (gCBS/gRed) a alíquota utilizada deverá ser a tag Alíquota Efetiva (gCBS/gRed/pAliqEfet): vCBS = (gIBSCBS/vBC x (pAliqEfet / 100)) - vDif - vDevTrib"
+   }
+  ]
+ },
+ "1074": {
+  "message": "Rejeição: Não informado o grupo de redução de alíquota Municipal [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB45-20",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo gIBSCBS (id: UB15, grupo: imposto/IBSCBS/gIBSCBS): - Se CST possui indicador que exige o uso de Redução de Alíquota (ind_gRed = 1), ou foi informado o grupo de compras governamentais (grupo: gCompraGov): - Grupo de Redução de Alíquota Municipal não informado (grupo: gIBSMun/gRed) Exceção: A regra não se aplica para CST do IBS/CBS (tag: IBSCBS/CST) que possui indicador que não permite a informação do IBS/CBS (ind_gIBSCBS = 0). Observação: Consultar Tabela de Indicadores de CST do IBS e CBS."
+   }
+  ]
+ },
+ "1076": {
+  "message": "Rejeição: Total da BC do IBS e da CBS difere da soma dos itens",
+  "entries": [
+   {
+    "rv": "W35-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "O total da BC do IBS e da CBS de deverá ser a soma dos campos vBC (tag: gIBSCBS/vBC) informados nos itens"
+   }
+  ]
+ },
+ "1077": {
+  "message": "Rejeição: Total de Diferimento do IBS UF difere da soma dos itens",
+  "entries": [
+   {
+    "rv": "W38-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "O total do diferimento do IBS UF deverá ser a soma do campo vDif do IBS UF informados nos itens"
+   }
+  ]
+ },
+ "1078": {
+  "message": "Rejeição: Total Devolvido do IBS UF difere da soma dos itens",
+  "entries": [
+   {
+    "rv": "W39-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "O total devolvido do IBS UF deverá ser a soma do campo vDevTrib do IBS UF informados nos itens"
+   }
+  ]
+ },
+ "1079": {
+  "message": "Rejeição: Não informado o grupo de redução de alíquota da CBS [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB64-20",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo gIBSCBS (id: UB15, grupo: imposto/IBSCBS/gIBSCBS): - Se CST possui indicador que exige o uso de Redução de Alíquota (ind_gRed = 1), ou foi informado o grupo de compras governamentais (grupo: gCompraGov): - Grupo de Redução de Alíquota da CBS não informado (grupo: gCBS/gRed) Exceção: A regra não se aplica para CST do IBS/CBS (tag: IBSCBS/CST) que possui indicador que não permite a informação do IBS/CBS (ind_gIBSCBS = 0). Observação: Consultar Tabela de Indicadores de CST do IBS e CBS."
+   }
+  ]
+ },
+ "1080": {
+  "message": "Rejeição: Total de IBS UF difere da soma dos itens",
+  "entries": [
+   {
+    "rv": "W41-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "O total do IBS UF deverá ser a soma do campo vIBSUF informados nos itens"
+   }
+  ]
+ },
+ "1081": {
+  "message": "Rejeição: Total de Diferimento do IBS Municipal difere da soma dos itens",
+  "entries": [
+   {
+    "rv": "W43-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "O total do Diferimento do IBS Municipal deverá ser a soma do campo vDif do IBS Municipal informados nos itens"
+   }
+  ]
+ },
+ "1082": {
+  "message": "Rejeição: Total Devolvido do IBS Municipal difere da soma dos itens",
+  "entries": [
+   {
+    "rv": "W44-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "O total devolvido do IBS Municipal deverá ser a soma do campo vDevTrib do IBS Municipal informados nos itens"
+   }
+  ]
+ },
+ "1083": {
+  "message": "Rejeição: CST do IBS/CBS informado não permite informação de diferimento Municipal [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB40-20",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "CST possui indicador que não permite o uso de diferimento (ind_gDif = 0): - Grupo de Diferimento informado indevidamente (grupo: gIBSMun/gDif) Observação: Consultar Tabela de Indicadores de CST do IBS e CBS."
+   }
+  ]
+ },
+ "1084": {
+  "message": "Rejeição: Total de IBS Municipal difere da soma dos itens",
+  "entries": [
+   {
+    "rv": "W46-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "O total do IBS Municipal deverá ser a soma do campo vIBSMun informados nos itens"
+   }
+  ]
+ },
+ "1085": {
+  "message": "Rejeição: Total do IBS difere da soma do vIBS dos itens",
+  "entries": [
+   {
+    "rv": "W47-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "O total do IBS deverá ser a soma do valor do IBS (tag: gIBSCBS/vIBS) informado nos itens"
+   }
+  ]
+ },
+ "1086": {
+  "message": "Rejeição: Total de Crédito Presumido do IBS UF difere da soma dos itens",
+  "entries": [
+   {
+    "rv": "W48-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "O total do Crédito Presumido do IBS deverá ser a soma do campo vCredPres do IBS informados nos itens"
+   }
+  ]
+ },
+ "1087": {
+  "message": "Rejeição: Total de Crédito Presumido da CBS difere da soma dos itens",
+  "entries": [
+   {
+    "rv": "W56a-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "O total do Crédito Presumido da CBS deverá ser a soma do campo vCredPres da CBS informados nos itens"
+   }
+  ]
+ },
+ "1088": {
+  "message": "Rejeição: Total de Diferimento da CBS difere da soma dos itens",
+  "entries": [
+   {
+    "rv": "W53-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "O total do Diferimento da CBS deverá ser a soma do campo vDif da CBS informados nos itens"
+   }
+  ]
+ },
+ "1089": {
+  "message": "Rejeição: Total Devolvido da CBS difere da soma dos itens",
+  "entries": [
+   {
+    "rv": "W54-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "O total devolvido da CBS deverá ser a soma do campo vDevTrib da CBS informados nos itens"
+   }
+  ]
+ },
+ "1090": {
+  "message": "Rejeição: CST do IBS/CBS informado não permite informação de diferimento da CBS [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB59-20",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se CST possui indicador que não permite o uso de diferimento (ind_gDif = 0): - Grupo de Diferimento informado indevidamente (grupo: gCBS/gDif) Observação: Consultar Tabela de Indicadores de CST do IBS e CBS."
+   }
+  ]
+ },
+ "1091": {
+  "message": "Rejeição: Total de CBS difere da soma dos itens",
+  "entries": [
+   {
+    "rv": "W56-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "O total da CBS deverá ser a soma do campo vCBS informados nos itens"
+   }
+  ]
+ },
+ "1107": {
+  "message": "Rejeição: Valor do Crédito Presumido do IBS não pode ser superior a vProd [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB125-10",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado Valor do Crédito Presumido do IBS (tag: gIBSCredPres/vCredPres) e cCredPres = “4-Aquisição de bens móveis de PF não contrib. para revenda (exemplo: veículos / brechó): - Valor do Crédito Presumido (tag: vCredPres) não pode ser superior a vProd"
+   }
+  ]
+ },
+ "1114": {
+  "message": "Rejeição: Classificação Tributária do IBS e da CBS informada não permite informação da tributação regular [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB68-11",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo da Tributação Regular (gIBSCBS/gTribRegular): - Informado cClassTrib (tag: IBSCBS/cClassTrib) com indicador que não permite informação do grupo de Tributação Regular (ind_gTribRegular = 0) Observação: Consultar Tabela de Código de Classificação Tributária do IBS e CBS."
+   }
+  ]
+ },
+ "1115": {
+  "message": "Rejeição: Grupo IBSCBS não informado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB12-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Não informado grupo de imposto IBS e CBS (grupo: det/imposto/IBSCBS) Exceção 1: Não se aplica à NFe de devolução de mercadorias (tag: finNFe = 4) ou NFe complementar (tag: finNFe = 2) que referencia NFe com data de emissão anterior a 2026 2027 [o PDF traz dois anos neste ponto; confira no documento oficial]. Exceção 2: Não se aplica caso informado campo cProdANP (id: LA02) e produto está presente na Tabela de Combustíveis Sujeitos à Tributação Monofásica (coluna cProdANP). Observação 1: implementação em homologação para NFe com data de emissão maior ou igual a 01/07/2026 e emitente com CRT 3=Regime Normal. Observação 2: implementação em produção para NFe com data de emissão maior ou igual a 03/08/2026 e emitente com CRT 3=Regime Normal. Observação 3: implementação em produção para emitente com CRT com 1=Simples Nacional, 2=Simples Nacional, excesso sublimite de receita bruta ou 4=Simples Nacional - Microempreendedor Individual – MEI a partir 04/01/2027. Observação 2: implementação futura para produção. Observação 3: Tabela de Combustíveis Sujeitos à Tributação Monofásica publicada na aba “Documentos”, opção “Diversos” do Portal Nacional da Nota Fiscal Eletrônica."
+   }
+  ]
+ },
+ "1118": {
+  "message": "Rejeição: Total de IBS e CBS informado indevidamente",
+  "entries": [
+   {
+    "rv": "W34-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se grupo de totais do IBS e da CBS (tag: total/IBSCBSTot) informado: - Nenhum item possui IBS / CBS informado (id: UB12, tag: IBSCBS)"
+   }
+  ]
+ },
+ "1119": {
+  "message": "Rejeição: Total de IBS e CBS não informado",
+  "entries": [
+   {
+    "rv": "W34-20",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se grupo de totais do IBS e da CBS (tag: total/IBSCBSTot) não informado: - Pelo menos um item possui IBS / CBS informado (id: UB12, tag: IBSCBS)"
+   }
+  ]
+ },
+ "1124": {
+  "message": "Rejeição: Valor do Crédito Presumido da CBS não pode ser superior a vProd [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB129-10",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado Valor do Crédito Presumido da CBS (tag: gCBSCredPres/vCredPres) e cCredPres = “4-Aquisição de bens móveis de PF não contrib. para revenda (exemplo: veículos / brechó): - Valor do Crédito Presumido (tag: vCredPres) não pode ser superior a vProd"
+   }
+  ]
+ },
+ "1131": {
+  "message": "Rejeição: Grupo de transferência de crédito informado indevidamente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB13-44",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se CST do IBS/CBS (tag: IBSCBS/CST) possui indicador que não permite informação do grupo de Transferência de Crédito (ind_gTransfCred = 0): - Grupo gTransfCred (id: UB106, grupo: imposto/IBSCBS/gTransfCred) informado indevidamente Observação 1: Consultar Tabela de Indicadores de CST do IBS e da CBS."
+   }
+  ]
+ },
+ "1132": {
+  "message": "Rejeição: Grupo de transferência de crédito não informado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB13-45",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se CST do IBS/CBS (tag: IBSCBS/CST) possui indicador que exige informação do grupo de Transferência de Crédito (ind_gTransfCred = 1): - Grupo gTransfCred (id: UB106, grupo: imposto/IBSCBS/gTransfCred) não informado Observação 1: Consultar Tabela de Indicadores de CST do IBS e da CBS."
+   }
+  ]
+ },
+ "1134": {
+  "message": "Rejeição: CST do IBS/CBS informado não permite informação do grupo para apropriação de crédito presumido de IBS sobre o saldo devedor na ZFM [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB131-20",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se CST possui indicador que não permite o uso de crédito presumido para a ZFM (ind_gCredPresIBSZFM = 0): - Grupo gCredPresIBSZFM (id: UB131) informado indevidamente"
+   }
+  ]
+ },
+ "1135": {
+  "message": "Rejeição: CST do IBS/CBS informado exige a informação do grupo para apropriação de crédito presumido de IBS sobre o saldo devedor na ZFM [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB131-30",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se CST possui indicador que obriga o uso de crédito presumido para a ZFM (ind_gCredPresIBSZFM = 1): - Não informado grupo gCredPresIBSZFM (id: UB131)"
+   }
+  ]
+ },
+ "1136": {
+  "message": "Rejeição: Não é possível repetir o Tipo de Classificação para o cálculo do crédito presumido na ZFM neste DFe [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB133-10",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo gCredPresIBSZFM (id: UB131): - Há dois ou mais itens com o mesmo Tipo de Classificação para o cálculo do crédito presumido na ZFM (mesmo valor na tag tpCredPresIBSZFM, id: UB133)"
+   }
+  ]
+ },
+ "1138": {
+  "message": "Rejeição: Não é permitido o uso de Crédito Presumido ZFM na NFC-e modelo 65 [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB131-10",
+    "model": "65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo do IBS da ZFM (grupo: gCredPresIBSZFM): - Modelo DFe = 65-NFCe"
+   }
+  ]
+ },
+ "1150": {
+  "message": "Rejeição: Valor do IBS do Item (vIBS) difere do calculado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB54a-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado gIBSCBS: - Valor do IBS do Item (vIBS) deverá ser resultante da soma do vIBSUF e vIBSMun. Caso utilizado cCredPres que possui indicador de dedução do Crédito Presumido (indDeduzCredPres=1), o vCredPres deve ser subtraído. vIBS = vIBSUF + vIBSMun – vCredPres (se indDeduzCredPres=1)"
+   }
+  ]
+ },
+ "1151": {
+  "message": "Rejeição: Grupo gIBSCBSMono informado indevidamente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB13-39",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se CST do IBS/CBS (tag: IBSCBS/CST) informado possui indicador que não permite a informação do IBS/CBS Monofásico (ind_gIBSCBSMono = 0): - Grupo gIBSCBSMono (id: UB84, grupo: imposto/IBSCBS/gIBSCBSMono) informado indevidamente Observação 1: Consultar Tabela de Indicadores de CST do IBS e da CBS."
+   }
+  ]
+ },
+ "1158": {
+  "message": "Rejeição: Tipo de Nota de Crédito não permite o grupo para apropriação de crédito presumido de IBS sobre o saldo devedor na ZFM [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB131-40",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado grupo do IBS da ZFM (grupo: gCredPresIBSZFM): - Tipo de Nota de Crédito (tag: tpNFCredito) diferente de 02 - Apropriação de crédito presumido de IBS sobre o saldo devedor na ZFM (art. 450, § 1º, LC 214/25)"
+   }
+  ]
+ },
+ "1159": {
+  "message": "Rejeição: Tipo de Nota de Crédito exige o grupo para apropriação de crédito presumido de IBS sobre o saldo devedor na ZFM [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB131-50",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se não informado grupo do IBS da ZFM (grupo: gCredPresIBSZFM): - Tipo de Nota de Crédito (tag: tpNFCredito) igual a 02 - Apropriação de crédito presumido de IBS sobre o saldo devedor na ZFM (art. 450, § 1º, LC 214/25)"
+   }
+  ]
+ },
+ "1160": {
+  "message": "Rejeição: Ano e mês referência do período de apuração superior ao ano e mês atual [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB132-10",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado Ano e mês referência do período de apuração (ID: UB132, tag: gCredPresIBSZFM/competApur): - Ano/Mês informado superior ao Ano/Mês atual."
+   }
+  ]
+ },
+ "1175": {
+  "message": "Rejeição: Grupo de Crédito Presumido na Operação informado indevidamente [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB120-20",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se cClassTrib possui indicador que não permite o uso de crédito presumido na operação (ind_gCredPresOper = 0): - Crédito presumido na operação informado indevidamente (grupo: IBSCBS/gCredPresOper) Exceção: Essa regra não se aplica no fornecimento de bem móvel usado (tag: indBemMovelUsado=1). Observação 01: Consultar Tabela de Código de Classificação Tributária do IBS e CBS. Observação 02: O valor \"1\" do indicador ind_gCredPresOper significa que o contribuinte pode utilizar o crédito presumido, sem obrigatoriedade (permite, mas não exige)."
+   }
+  ]
+ },
+ "1190": {
+  "message": "Rejeição: Inscrição do emitente na Suframa não informado",
+  "entries": [
+   {
+    "rv": "UB66a-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado gCBS/gALCZFMCBS: - Inscrição do emitente na Suframa (tag:emit/ISUFemit) não informada"
+   }
+  ]
+ },
+ "1191": {
+  "message": "Rejeição: Grupo de operações em áreas incentivadas (ALC/ZFM) - CBS (alíquota zero) não permitido [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB66a-20",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado gCBS/gALCZFMCBS: - NCM do Produto (tag: prod/NCM) inicia por: a) 93 (armas e munições); b) 24 (fumos e derivados); c) 2203 a 2208 (bebidas alcoólicas); d) 8703 (automóveis de passageiros); e) 33, exceto 3303 a 3307 (produtos de perfumaria ou de toucador). - OU Emitente e destinatário não estão na mesma área incentivada (ou seja, emitente e destinatário não estão dentro da ZFM, ou emitente e destinatário não estão na mesma ALC), conforme relação abaixo: Município Emitente Município Destinatário ZFM 1301902-Itacoatiara (AM) 1301902-Itacoatiara (AM) Observação: Esta RV verifica se contribuinte preenche os requisitos do art. 451 ou 466 LCP 214/25 para a alíquota zero da CBS."
+   }
+  ]
+ },
+ "1192": {
+  "message": "Rejeição: Número do processo na Suframa não informado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB66c-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado gCBS/gALCZFMCBS/tpALCZFMCBS = 2: - Número do processo na Suframa (tag:gALCZFMCBS/nProcSuframa) não informado ou preenchido com zeros"
+   }
+  ]
+ },
+ "1200": {
+  "message": "Rejeição: cClassTrib incompatível com o tipo de Nota de Débito [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB14-70",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado tipo de nota de débito (tag: tpNFDebito): - Validar se tpNFDebito é compatível com o cClassTrib, de acordo com a tabela abaixo: tpNFDebito cClassTrib 01=Transferência de créditos para Cooperativas; 800002 02=Anulação de Crédito por Saídas Imunes/Isentas; 811001 03=Débitos de notas fiscais não processadas na apuração; 811002 04=Multa e juros; Não limitar 05=Transferência de crédito na sucessão; 800001 06=Pagamento antecipado; Não limitar 07=Perda em estoque; 410030 08=Desenquadramento do SN; 811003 -"
+   }
+  ]
+ },
+ "1201": {
+  "message": "Rejeição: cClassTrib incompatível com o tipo de Nota de Crédito [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB14-80",
+    "model": "55",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado tipo de nota de crédito (tag: tpNFCredito): - Validar se tpNFCredito é compatível com o cClassTrib, de acordo com a tabela abaixo: tpNFCredito cClassTrib 01=Multa e Juros Não limitar 02=Apropriação de crédito presumido de IBS sobre o saldo devedor na ZFM (art. 450, § 1º, LC 214/25) 810001 03=Retorno por recusa total na entrega ou por não localização do destinatário na tentativa de entrega Não limitar 04=Redução de valores Não limitar 05=Transferência de crédito na sucessão 800001 06=Retorno por recusa parcial na entrega Não limitar --"
+   }
+  ]
+ },
+ "1218": {
+  "message": "Rejeição: Valor da CBS para operação fora de áreas ou regimes incentivado difere do calculado [nItem: N]",
+  "entries": [
+   {
+    "rv": "UB66e-10",
+    "model": "55/65",
+    "src": "NT 2025.002-RTC v1.52",
+    "rule": "Se informado gCBS/gALCZFMCBS: - vTribRegCBS (id: UB66e) deverá ser resultante de: vTribRegCBS = gIBSCBS/vBC x (gALCZFMCBS/pAliqEfetRegCBS (id: UB66d) / 100)"
+   }
+  ]
+ }
+}

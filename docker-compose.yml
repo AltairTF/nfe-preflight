@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        SITE_URL: ${SITE_URL:-http://localhost:3210}
+        CONTACT_EMAIL: ${CONTACT_EMAIL:-}
+        DONATE_URL: ${DONATE_URL:-}
+    ports:
+      - "3210:3000"
+    volumes:
+      - nfe-data:/data
+    environment:
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?crie o arquivo .env a partir do .env.example}
+    restart: unless-stopped
+
+volumes:
+  nfe-data:

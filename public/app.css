@@ -1,0 +1,81 @@
+/* Plain, early-2010s look: system fonts, flat boxes, no animation, no dark mode. */
+* { box-sizing: border-box; }
+body { margin: 0; background: #e9ecef; color: #222; font: 14px/1.5 Arial, Helvetica, sans-serif; }
+main, #wrap { max-width: 800px; margin: 0 auto; padding: 16px; background: #fff; border-left: 1px solid #c8cdd2; border-right: 1px solid #c8cdd2; min-height: 100vh; }
+body.admin #wrap { max-width: 960px; }
+h1 { margin: 0 0 6px; padding-bottom: 6px; border-bottom: 2px solid #2a4a7a; color: #2a4a7a; font: bold 24px Georgia, "Times New Roman", serif; }
+h2 { margin: 20px 0 8px; font-size: 16px; color: #2a4a7a; }
+h3 { margin: 16px 0 6px; font-size: 14px; }
+a { color: #1a55a8; }
+header p { margin: 0 0 16px; color: #555; }
+.card { margin: 0 0 16px; padding: 12px 14px; background: #f6f7f8; border: 1px solid #c8cdd2; }
+.card h2 { margin-top: 0; }
+.sub { display: block; margin: 12px 0 4px; color: #555; }
+.note, footer { color: #666; font-size: 12px; }
+.note { margin: 12px 0 0; }
+footer { margin-top: 24px; padding-top: 8px; border-top: 1px solid #c8cdd2; }
+
+.drop { display: block; padding: 18px; text-align: center; background: #fff; border: 1px dashed #8a94a0; cursor: pointer; }
+.drop.over, .drop:focus-within { border-color: #1a55a8; background: #eef4fc; }
+.drop input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+
+textarea, input[type=password], input[type=text], input[type=email], input[type=number], input:not([type]) {
+  width: 100%; padding: 5px; border: 1px solid #a9b0b8; background: #fff; color: #222; font: 13px Consolas, Menlo, "Courier New", monospace;
+}
+textarea { font-size: 12px; }
+.row { margin-top: 10px; }
+.row button { margin-right: 6px; }
+button { padding: 5px 14px; border: 1px solid #1f4f99; background: #2a5db0; color: #fff; font: bold 13px Arial, sans-serif; cursor: pointer; }
+button:hover { background: #244f96; }
+button.ghost { background: #f0f0f0; color: #222; border-color: #999; }
+button.ghost:hover { background: #e2e2e2; }
+button:disabled { opacity: .6; cursor: wait; }
+button.link { padding: 0; border: 0; background: none; color: #1a55a8; font: 14px Arial, sans-serif; text-decoration: underline; }
+:focus-visible { outline: 2px solid #e08a00; outline-offset: 1px; }
+details { margin-top: 12px; }
+summary { cursor: pointer; color: #1a55a8; }
+
+.summary { margin: 0 0 10px; padding: 8px 10px; border: 1px solid; font-weight: bold; }
+.summary.ok { background: #e6f4e6; border-color: #7bb27b; color: #1c5a1c; }
+.summary.bad { background: #fbeaea; border-color: #d29a9a; color: #8a1c1c; }
+ol { margin: 0; padding: 0; list-style: none; }
+#issues li { display: flex; gap: 8px; align-items: baseline; padding: 6px 0; border-top: 1px solid #dde1e5; }
+#issues li:first-child { border-top: 0; }
+.rule { flex: none; min-width: 3.6em; padding: 0 6px; background: #8a1c1c; color: #fff; text-align: center; font: bold 12px Consolas, Menlo, monospace; }
+.msg { flex: 1; overflow-wrap: anywhere; }
+button.line { flex: none; font-size: 12px; }
+.code { max-height: 400px; overflow: auto; background: #fff; border: 1px solid #a9b0b8; font: 12px/1.45 Consolas, Menlo, "Courier New", monospace; }
+.code div { display: flex; white-space: pre; }
+.code .n { flex: none; width: 3.5em; padding-right: 8px; text-align: right; color: #888; background: #f0f0f0; user-select: none; }
+.code .bad { background: #fff3b0; }
+#report { margin: 0 0 10px; }
+
+/* Admin */
+#top { margin: -16px -16px 16px; padding: 8px 16px; background: #2a4a7a; color: #fff; }
+#top .brand { color: #fff; font-weight: bold; text-decoration: none; }
+#top form { float: right; }
+#top button.link { color: #fff; }
+table { width: 100%; margin: 0 0 12px; border-collapse: collapse; }
+th, td { padding: 5px 8px; border: 1px solid #c8cdd2; text-align: left; vertical-align: top; }
+th { background: #eef0f2; font-weight: bold; }
+td.n { text-align: right; white-space: nowrap; }
+tr.off td { color: #888; background: #f6f6f6; }
+table.narrow { width: auto; min-width: 240px; }
+table.sum th { width: 1%; white-space: nowrap; }
+table.form th { width: 180px; background: #f6f7f8; }
+.err { padding: 8px 10px; background: #fbeaea; border: 1px solid #d29a9a; color: #8a1c1c; }
+.tag { padding: 1px 6px; background: #8a1c1c; color: #fff; font: bold 12px Arial; vertical-align: middle; }
+form.inline { display: inline; }
+input.key { font-size: 14px; }
+@media (max-width: 560px) { #issues li { flex-wrap: wrap; } main, #wrap { border: 0; } th, td { padding: 4px; } }
+
+/* Public pages */
+.nav { margin: 0 0 12px; padding-bottom: 6px; border-bottom: 1px solid #dde1e5; font-size: 13px; color: #888; }
+blockquote { margin: 8px 0; padding: 8px 12px; background: #f6f7f8; border-left: 3px solid #2a4a7a; overflow-wrap: anywhere; }
+pre.pre { margin: 8px 0; padding: 10px; background: #f6f7f8; border: 1px solid #c8cdd2; overflow-x: auto; font: 12px/1.45 Consolas, Menlo, "Courier New", monospace; }
+code { padding: 0 3px; background: #eef0f2; font: 12px Consolas, Menlo, "Courier New", monospace; }
+main ul { padding-left: 22px; }
+
+.donate { margin: 16px 0 0; padding: 8px 10px; border: 1px solid #c8cdd2; background: #f6f7f8; font-size: 13px; }
+a.btn { display: inline-block; padding: 5px 14px; border: 1px solid #1f4f99; background: #2a5db0; color: #fff; font: bold 13px Arial, sans-serif; text-decoration: none; }
+a.btn:hover { background: #244f96; }

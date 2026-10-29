@@ -1,0 +1,1610 @@
+{
+ "cst": {
+  "000": {
+   "gIBSCBS": true,
+   "gIBSCBSMono": false,
+   "gRed": false,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "010": {
+   "gIBSCBS": true,
+   "gIBSCBSMono": false,
+   "gRed": false,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "011": {
+   "gIBSCBS": true,
+   "gIBSCBSMono": false,
+   "gRed": true,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "200": {
+   "gIBSCBS": true,
+   "gIBSCBSMono": false,
+   "gRed": true,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "220": {
+   "gIBSCBS": true,
+   "gIBSCBSMono": false,
+   "gRed": false,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "222": {
+   "gIBSCBS": true,
+   "gIBSCBSMono": false,
+   "gRed": false,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "221": {
+   "gIBSCBS": true,
+   "gIBSCBSMono": false,
+   "gRed": false,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "400": {
+   "gIBSCBS": false,
+   "gIBSCBSMono": false,
+   "gRed": false,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "410": {
+   "gIBSCBS": false,
+   "gIBSCBSMono": false,
+   "gRed": false,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "510": {
+   "gIBSCBS": true,
+   "gIBSCBSMono": false,
+   "gRed": false,
+   "gDif": true,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "515": {
+   "gIBSCBS": true,
+   "gIBSCBSMono": false,
+   "gRed": true,
+   "gDif": true,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "550": {
+   "gIBSCBS": true,
+   "gIBSCBSMono": false,
+   "gRed": false,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "620": {
+   "gIBSCBS": false,
+   "gIBSCBSMono": true,
+   "gRed": false,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "800": {
+   "gIBSCBS": false,
+   "gIBSCBSMono": false,
+   "gRed": false,
+   "gDif": false,
+   "gTransfCred": true,
+   "gCredPresIBSZFM": false
+  },
+  "810": {
+   "gIBSCBS": false,
+   "gIBSCBSMono": false,
+   "gRed": false,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": true
+  },
+  "811": {
+   "gIBSCBS": false,
+   "gIBSCBSMono": false,
+   "gRed": false,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "820": {
+   "gIBSCBS": false,
+   "gIBSCBSMono": false,
+   "gRed": false,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  },
+  "830": {
+   "gIBSCBS": true,
+   "gIBSCBSMono": false,
+   "gRed": false,
+   "gDif": false,
+   "gTransfCred": false,
+   "gCredPresIBSZFM": false
+  }
+ },
+ "cClassTrib": {
+  "000001": {
+   "cst": "000",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "000002": {
+   "cst": "000",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "000003": {
+   "cst": "000",
+   "gTribRegular": false,
+   "gCredPresOper": true,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "000004": {
+   "cst": "000",
+   "gTribRegular": false,
+   "gCredPresOper": true,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "000005": {
+   "cst": "000",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "000006": {
+   "cst": "000",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "010001": {
+   "cst": "010",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "010002": {
+   "cst": "010",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "011001": {
+   "cst": "011",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "011002": {
+   "cst": "011",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "011003": {
+   "cst": "011",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "011004": {
+   "cst": "011",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "011005": {
+   "cst": "011",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200001": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200002": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200003": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200004": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200005": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "200006": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200007": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200008": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "200009": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200010": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200011": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "200012": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200013": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200014": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200015": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200016": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200017": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200018": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200019": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200020": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200021": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200022": {
+   "cst": "200",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "200023": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "200024": {
+   "cst": "200",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "200025": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200026": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200027": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200028": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200029": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200030": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200031": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200032": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200033": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200034": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200035": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200036": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200037": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200038": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200039": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "200040": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200041": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200042": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200043": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "200044": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200045": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200046": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200047": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200048": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200049": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200050": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200051": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200052": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200053": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200054": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "200055": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "200056": {
+   "cst": "200",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "220001": {
+   "cst": "220",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "220002": {
+   "cst": "220",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "220003": {
+   "cst": "220",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "221001": {
+   "cst": "221",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "221002": {
+   "cst": "221",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "221003": {
+   "cst": "221",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "221004": {
+   "cst": "221",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "222001": {
+   "cst": "222",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "400001": {
+   "cst": "400",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "400002": {
+   "cst": "400",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "400003": {
+   "cst": "400",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "400004": {
+   "cst": "400",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "410001": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "410002": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "410003": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "410004": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "410005": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "410006": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "410007": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "410008": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "410009": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "410010": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "410011": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "410012": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "410013": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "410014": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "410015": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "410016": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": true,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "410017": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "410018": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "410019": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "410020": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "410021": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "410022": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "410023": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "410024": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "410025": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "410026": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "410027": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "410028": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "410029": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "410030": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "410031": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "410032": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "410033": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "410034": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "410035": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "410036": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "410037": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "410999": {
+   "cst": "410",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "510001": {
+   "cst": "510",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "515001": {
+   "cst": "515",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550001": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550002": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "550003": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550004": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550005": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550006": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550007": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550008": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550009": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550010": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550011": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550012": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550013": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550014": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550015": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550016": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550017": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550018": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550019": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550020": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550021": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550022": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550023": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550024": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "550025": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "550026": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550027": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550028": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "550029": {
+   "cst": "550",
+   "gTribRegular": true,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "620001": {
+   "cst": "620",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "620002": {
+   "cst": "620",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "620003": {
+   "cst": "620",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "620004": {
+   "cst": "620",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "620005": {
+   "cst": "620",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "620006": {
+   "cst": "620",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": true
+  },
+  "620007": {
+   "cst": "620",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "800001": {
+   "cst": "800",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "800002": {
+   "cst": "800",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "810001": {
+   "cst": "810",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "811001": {
+   "cst": "811",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "811002": {
+   "cst": "811",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "811003": {
+   "cst": "811",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  },
+  "820001": {
+   "cst": "820",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "820002": {
+   "cst": "820",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "820003": {
+   "cst": "820",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "820004": {
+   "cst": "820",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "820005": {
+   "cst": "820",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "820006": {
+   "cst": "820",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "820007": {
+   "cst": "820",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "820008": {
+   "cst": "820",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "820009": {
+   "cst": "820",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": false,
+   "indNFCe": false
+  },
+  "830001": {
+   "cst": "830",
+   "gTribRegular": false,
+   "gCredPresOper": false,
+   "indNFe": true,
+   "indNFCe": false
+  }
+ },
+ "cCredPres": {
+  "01": {
+   "deduz": false,
+   "gCBS": true,
+   "gIBS": true
+  },
+  "02": {
+   "deduz": false,
+   "gCBS": true,
+   "gIBS": true
+  },
+  "03": {
+   "deduz": false,
+   "gCBS": true,
+   "gIBS": true
+  },
+  "04": {
+   "deduz": true,
+   "gCBS": true,
+   "gIBS": true
+  },
+  "05": {
+   "deduz": false,
+   "gCBS": true,
+   "gIBS": false
+  },
+  "06": {
+   "deduz": false,
+   "gCBS": true,
+   "gIBS": false
+  },
+  "07": {
+   "deduz": true,
+   "gCBS": false,
+   "gIBS": true
+  },
+  "08": {
+   "deduz": false,
+   "gCBS": false,
+   "gIBS": true
+  },
+  "09": {
+   "deduz": false,
+   "gCBS": false,
+   "gIBS": true
+  },
+  "10": {
+   "deduz": false,
+   "gCBS": true,
+   "gIBS": false
+  },
+  "11": {
+   "deduz": true,
+   "gCBS": false,
+   "gIBS": true
+  },
+  "12": {
+   "deduz": false,
+   "gCBS": false,
+   "gIBS": true
+  },
+  "13": {
+   "deduz": false,
+   "gCBS": true,
+   "gIBS": false
+  }
+ },
+ "pBioObrigatorio": [
+  {
+   "cProdANP": "320102001",
+   "pBio": 27.0,
+   "ini": "2015-03-16",
+   "fim": "2025-07-31"
+  },
+  {
+   "cProdANP": "320102001",
+   "pBio": 30.0,
+   "ini": "2025-08-01",
+   "fim": "2026-07-31"
+  },
+  {
+   "cProdANP": "320102002",
+   "pBio": 27.0,
+   "ini": "2015-03-16",
+   "fim": "2025-07-31"
+  },
+  {
+   "cProdANP": "320102002",
+   "pBio": 30.0,
+   "ini": "2025-08-01",
+   "fim": "2026-07-31"
+  },
+  {
+   "cProdANP": "320103001",
+   "pBio": 27.0,
+   "ini": "2015-03-16",
+   "fim": "2025-07-31"
+  },
+  {
+   "cProdANP": "320103001",
+   "pBio": 30.0,
+   "ini": "2025-08-01",
+   "fim": "2026-07-31"
+  },
+  {
+   "cProdANP": "320103002",
+   "pBio": 27.0,
+   "ini": "2015-03-16",
+   "fim": "2025-07-31"
+  },
+  {
+   "cProdANP": "320103002",
+   "pBio": 30.0,
+   "ini": "2025-08-01",
+   "fim": "2026-07-31"
+  },
+  {
+   "cProdANP": "320103003",
+   "pBio": 27.0,
+   "ini": "2015-03-16",
+   "fim": "2025-07-31"
+  },
+  {
+   "cProdANP": "320103003",
+   "pBio": 30.0,
+   "ini": "2025-08-01",
+   "fim": "2026-07-31"
+  },
+  {
+   "cProdANP": "320301001",
+   "pBio": 27.0,
+   "ini": "2015-03-16",
+   "fim": "2025-07-31"
+  },
+  {
+   "cProdANP": "320301001",
+   "pBio": 30.0,
+   "ini": "2025-08-01",
+   "fim": "2026-07-31"
+  },
+  {
+   "cProdANP": "320301002",
+   "pBio": 27.0,
+   "ini": "2015-03-16",
+   "fim": "2025-07-31"
+  },
+  {
+   "cProdANP": "320301002",
+   "pBio": 30.0,
+   "ini": "2025-08-01",
+   "fim": "2026-07-31"
+  },
+  {
+   "cProdANP": "320102001",
+   "pBio": 32.0,
+   "ini": "2026-08-01",
+   "fim": null
+  },
+  {
+   "cProdANP": "320102002",
+   "pBio": 32.0,
+   "ini": "2026-08-01",
+   "fim": null
+  },
+  {
+   "cProdANP": "320102003",
+   "pBio": 25.0,
+   "ini": "2015-03-16",
+   "fim": null
+  },
+  {
+   "cProdANP": "320102005",
+   "pBio": 25.0,
+   "ini": "2015-03-16",
+   "fim": null
+  },
+  {
+   "cProdANP": "320103001",
+   "pBio": 32.0,
+   "ini": "2026-08-01",
+   "fim": null
+  },
+  {
+   "cProdANP": "320103002",
+   "pBio": 32.0,
+   "ini": "2026-08-01",
+   "fim": null
+  },
+  {
+   "cProdANP": "320103003",
+   "pBio": 32.0,
+   "ini": "2026-08-01",
+   "fim": null
+  },
+  {
+   "cProdANP": "320301001",
+   "pBio": 32.0,
+   "ini": "2026-08-01",
+   "fim": null
+  },
+  {
+   "cProdANP": "320301002",
+   "pBio": 32.0,
+   "ini": "2026-08-01",
+   "fim": null
+  }
+ ],
+ "cProdANPMonofasico": [
+  "210203001",
+  "210203003",
+  "210203004",
+  "210203005",
+  "320101001",
+  "320101002",
+  "320102001",
+  "320102002",
+  "320102003",
+  "320102005",
+  "320103001",
+  "320103002",
+  "320103003",
+  "320201001",
+  "320301001",
+  "320301002",
+  "420101004",
+  "420101005",
+  "420102004",
+  "420102005",
+  "420105001",
+  "420107001",
+  "420201001",
+  "420201003",
+  "420301002",
+  "810102001",
+  "810102003",
+  "810102004",
+  "820101001",
+  "820101003",
+  "820101011",
+  "820101012",
+  "820101013",
+  "820101026",
+  "820101027",
+  "820101032",
+  "820101033",
+  "820101034",
+  "820101030",
+  "820101025"
+ ]
+}

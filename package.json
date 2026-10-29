@@ -1,0 +1,10 @@
+{
+  "name": "nfe-preflight",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prestart": "node scripts/build-site.ts",
+    "start": "node src/server.ts",
+    "test": "node --test 'test/*.test.ts'"
+  }
+}
