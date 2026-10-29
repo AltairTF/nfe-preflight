@@ -1,11 +1,11 @@
-# Antes do primeiro deploy: troque `app` por um nome livre e SITE_URL pelo seu domínio.
 app = "nfe-preflight"
 primary_region = "gru"
 
+# O site é gerado no build da imagem, então estes valores vêm daqui e não de `fly secrets`.
 [build.args]
   SITE_URL = "https://nfepreflight.com.br"
   CONTACT_EMAIL = ""
-  DONATE_URL = ""
+  DONATE_URL = "https://ko-fi.com/altair_br"
 
 [[mounts]]
   source = "nfe_data"
