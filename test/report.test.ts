@@ -4,10 +4,12 @@ import { readFileSync } from "node:fs";
 import vm from "node:vm";
 
 // public/app.js is a browser script; run it against stub DOM objects to reach csv() and pdf().
+const saved: Record<string, string> = {};
 const stub: any = { addEventListener() {}, value: "", classList: { add() {}, remove() {} } };
 const ctx: any = vm.createContext({
   document: { getElementById: () => stub },
-  localStorage: { getItem: () => "", setItem() {} },
+  localStorage: { getItem: () => "", setItem(k: string, v: string) { saved[k] = v; }, removeItem(k: string) { delete saved[k]; } },
+  setInterval() {},
   URL, Blob, Uint8Array, Object, Set, Date, String, Math, console,
 });
 vm.runInContext(readFileSync(new URL("../public/app.js", import.meta.url), "utf8"), ctx);
@@ -41,4 +43,21 @@ test("PDF paginates long reports", () => {
   const many = { ...report, issues: Array.from({ length: 120 }, (_, i) => ({ rule: "1069", line: i, message: "m ".repeat(60) })) };
   const s = Buffer.from(ctx.pdf(many)).toString("latin1");
   assert.ok(Number(/\/Count (\d+)/.exec(s)![1]) > 1);
+});
+
+test("remembers only the last validation, in localStorage, and forgets on clear", () => {
+  ctx.remember({ valid: false, issues: [{ rule: "XSD", line: 1, message: "m" }], xml: "<a/>", at: new Date(0) });
+  ctx.remember({ valid: true, issues: [], xml: "<b/>", at: new Date(60000) });
+  assert.deepEqual(Object.keys(saved), ["nfe-preflight:last"]);
+  assert.deepEqual(JSON.parse(saved["nfe-preflight:last"]), { valid: true, issues: [], xml: "<b/>", at: 60000 });
+  ctx.forget();
+  assert.deepEqual(saved, {});
+});
+
+test("ago() words the age", () => {
+  const ago = (min: number) => ctx.ago(new Date(Date.now() - min * 60000));
+  assert.equal(ago(0), "agora há pouco");
+  assert.equal(ago(5), "há 5 min");
+  assert.equal(ago(180), "há 3 h");
+  assert.equal(ago(3000), "há 2 dia(s)");
 });

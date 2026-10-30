@@ -5,7 +5,7 @@ const drop = $("drop");
 for (const ev of ["dragenter", "dragover"]) drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); });
 for (const ev of ["dragleave", "drop"]) drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove("over"); });
 drop.addEventListener("drop", (e) => load(e.dataTransfer.files[0]));
-$("clear").addEventListener("click", () => { $("xml").value = ""; $("file").value = ""; $("result").hidden = true; });
+$("clear").addEventListener("click", () => { $("xml").value = ""; $("file").value = ""; $("result").hidden = true; last = null; forget(); });
 $("go").addEventListener("click", validate);
 
 async function load(file) {
@@ -43,8 +43,10 @@ async function validate() {
 // Result of the last successful validation, used by the report buttons.
 let last = null;
 
-function show(kind, text, issues, xml, ok) {
-  last = ok === undefined ? null : { valid: ok, issues, xml, at: new Date() };
+function show(kind, text, issues, xml, ok, at = new Date()) {
+  last = ok === undefined ? null : { valid: ok, issues, xml, at };
+  if (last && !restoring) remember(last);
+  showStamp();
   $("report").hidden = !last;
   $("result").hidden = false;
   const s = $("summary");
@@ -76,9 +78,34 @@ function show(kind, text, issues, xml, ok) {
     return row;
   }));
   $("codeTitle").hidden = code.hidden = !xml;
-  $("result").scrollIntoView({ behavior: "smooth", block: "start" });
+  if (!restoring) $("result").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+// ---- Last validation, kept only in this browser (localStorage) so it survives switching pages ----
+
+const KEY = "nfe-preflight:last";
+let restoring = false;
+
+// Storage can be blocked or full (2 MB XML); the page works the same without it.
+function remember(r) {
+  try { localStorage.setItem(KEY, JSON.stringify({ valid: r.valid, issues: r.issues, xml: r.xml, at: r.at.getTime() })); } catch {}
+}
+function forget() {
+  try { localStorage.removeItem(KEY); } catch {}
+}
+
+function ago(d) {
+  const min = Math.floor((Date.now() - d.getTime()) / 60000);
+  if (min < 1) return "agora há pouco";
+  if (min < 60) return `há ${min} min`;
+  const h = Math.floor(min / 60);
+  return h < 24 ? `há ${h} h` : `há ${Math.floor(h / 24)} dia(s)`;
+}
+
+function showStamp() {
+  $("saved").hidden = !last;
+  if (last) $("saved").textContent = `Validação de ${when(last.at)} (${ago(last.at)}). Fica guardada só neste navegador, não vai para o servidor, e é substituída pela próxima validação. O botão Limpar apaga.`;
+}
 function goTo(line) {
   const row = $(`L${line}`);
   if (row) row.scrollIntoView({ block: "center" });
@@ -165,3 +192,15 @@ function pdf(r) {
 
 $("csv").addEventListener("click", () => last && download(`relatorio-nfe-${stamp(last.at)}.csv`, "text/csv;charset=utf-8", csv(last)));
 $("pdf").addEventListener("click", () => last && download(`relatorio-nfe-${stamp(last.at)}.pdf`, "application/pdf", pdf(last)));
+
+// Runs last: it needs the helpers (pad, when) declared above.
+setInterval(showStamp, 60000);
+
+try {
+  const r = JSON.parse(localStorage.getItem(KEY));
+  if (r && Array.isArray(r.issues) && typeof r.xml === "string") {
+    restoring = true;
+    $("xml").value = r.xml;
+    show(r.valid ? "ok" : "bad", r.valid ? "Nenhum problema encontrado." : `${r.issues.length} problema(s) encontrado(s).`, r.issues, r.xml, r.valid, new Date(r.at));
+  }
+} catch {} finally { restoring = false; }
