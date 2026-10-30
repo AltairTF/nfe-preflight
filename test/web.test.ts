@@ -1,3 +1,4 @@
+import { VERSIONS } from "../src/rules.ts";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { mkdtempSync, readFileSync } from "node:fs";
@@ -35,7 +36,7 @@ test("/v1/try validates anonymously, is limited per IP", async () => {
   const { server, base } = await start();
   const call = () => fetch(`${base}/v1/try`, { method: "POST", body: valid });
   const first = await call();
-  assert.deepEqual(await first.json(), { valid: true, issues: [] });
+  assert.deepEqual(await first.json(), { valid: true, issues: [], versions: VERSIONS });
   for (let i = 0; i < 4; i++) await call();
   const limited = await call();
   assert.equal(limited.status, 429);

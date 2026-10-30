@@ -22,8 +22,8 @@ const report = { valid: false, issues, xml: 'x Id="NFe35250811222333000181550020
 
 test("CSV has BOM, ; separators, escaped quotes and neutralised formulas", () => {
   const out: string = ctx.csv(report);
-  assert.ok(out.startsWith("﻿\"Regra\";\"Linha\";\"Mensagem\"\r\n"));
-  assert.ok(out.includes('"1069";"62";"Rejeição: Valor da CBS difere do calculado [nItem: 1]"'));
+  assert.ok(out.startsWith("﻿\"Regra\";\"Situação\";\"Linha\";\"Caminho\";\"Mensagem\";\"Vigência\"\r\n"));
+  assert.ok(out.includes('"1069";"erro";"62";"";"Rejeição: Valor da CBS difere do calculado [nItem: 1]";""'));
   assert.ok(out.includes(`"'=HYPERLINK(""x"") and ""quotes""; semicolon"`));
 });
 

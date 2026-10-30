@@ -86,6 +86,7 @@ ${path === "/" ? '<script src="/app.js"></script>' : ""}
 <h2>2. Resultado</h2>
 <p id="summary" class="summary"></p>
 <p id="saved" class="note" hidden></p>
+<p id="versions" class="note" hidden></p>
 <div class="row" id="report" hidden>
 <button id="csv" type="button" class="ghost">Baixar CSV</button>
 <button id="pdf" type="button" class="ghost">Baixar PDF</button>

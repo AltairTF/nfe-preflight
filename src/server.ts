@@ -2,7 +2,7 @@ import { createServer } from "node:http";
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { validateXsd } from "./xsd.ts";
-import { validateRules } from "./rules.ts";
+import { validateRules, VERSIONS } from "./rules.ts";
 import { createLimiter } from "./auth.ts";
 import { createAdmin } from "./admin.ts";
 import { openDb, type Db } from "./db.ts";
@@ -70,8 +70,10 @@ export function makeServer(store: Db, adminPassword?: string, siteDir = SITE) {
       // Business rules assume a structurally valid document, so they only run once the XSD passes.
       let issues = await validateXsd(xml);
       if (issues.length === 0) issues = validateRules(xml);
-      store.logEvent(issues.length === 0 ? "try_valid" : "try_invalid");
-      reply(200, { valid: issues.length === 0, issues });
+      // Future rules (issue.vigencia) are warnings: they do not make the document invalid yet.
+      const valid = issues.every((i) => i.vigencia);
+      store.logEvent(valid ? "try_valid" : "try_invalid");
+      reply(200, { valid, issues, versions: VERSIONS });
     } catch {
       reply(500, { error: "validator_failed" });
     }

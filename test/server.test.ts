@@ -1,3 +1,4 @@
+import { VERSIONS } from "../src/rules.ts";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -18,7 +19,7 @@ async function start() {
 test("/v1/try reports issues for a broken XML and counts both outcomes", async () => {
   const { server, store, base } = await start();
   const post = (body: string) => fetch(`${base}/v1/try`, { method: "POST", body });
-  assert.deepEqual(await (await post(valid)).json(), { valid: true, issues: [] });
+  assert.deepEqual(await (await post(valid)).json(), { valid: true, issues: [], versions: VERSIONS });
   assert.equal((await (await post("<broken")).json()).valid, false);
   const month = Object.values(store.eventsIn(new Date(Date.now() - 3 * 3600_000).toISOString().slice(0, 7)));
   assert.deepEqual(month, [1, 1]);

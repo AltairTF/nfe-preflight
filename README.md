@@ -4,7 +4,7 @@ Pré-teste de NF-e (modelo 55 e 65) com os campos do IBS/CBS, em um site. Recebe
 
 **O que confere**
 1. **Estrutura:** schemas oficiais PL_010g v1.03 (Portal Nacional da NF-e), via `xmllint`.
-2. **Regras de negócio do IBS/CBS:** NT 2025.002-RTC v1.52, com os códigos de rejeição oficiais. Cálculo de valores e alíquotas, totais, CST e `cClassTrib` (tabelas da IT 2025.002 v1.70), diferimento, redução, crédito presumido, ZFM/ALC e biocombustíveis.
+2. **Regras de negócio do IBS/CBS:** NT 2025.002-RTC v1.52 e NT 2026.008 v1.00 (valor líquido do produto, ICMS previsto), com os códigos de rejeição oficiais. Cálculo de valores e alíquotas, totais, CST e `cClassTrib` (tabelas da IT 2025.002 v1.70), diferimento, redução, crédito presumido, ZFM/ALC e biocombustíveis.
 3. **Chave de acesso:** campo `Id` contra os campos da nota (502) e dígito verificador (253), do MOC 7.0.
 
 **O que não confere:** assinatura digital, certificado, situação do emitente e tudo o que a SEFAZ checa ao autorizar. É um pré-teste, não um substituto da SEFAZ. As regras de negócio só rodam quando a estrutura (XSD) passa.
@@ -68,6 +68,8 @@ Não há venda nem pagamento no site. Com `DONATE_URL`, um aviso em todas as pá
 - Regras de alíquota fixa cobrem 2025 a 2028 (IBS) e 2025 a 2026 (CBS). Depois disso a NT remete a legislação ainda não publicada.
 - Compra governamental: as regras de diferimento e redução são puladas nos itens com `gTribCompraGov`.
 - Nota Fiscal Avulsa (séries 890-899) usa o CNPJ da SEFAZ na chave e seria acusada no 502.
+- Regras que ainda não rejeitam em produção aparecem como **aviso de erro futuro**, com a data em que passam a valer (homologação e produção). Elas não tornam o XML inválido. Cada resposta traz as versões do schema e das NTs usadas, e cada problema das regras de negócio traz o caminho do campo (`NFe/infNFe/det[1]/...`). Erros do XSD não têm caminho, só a linha.
+- Da NT 2026.008 ficaram de fora VB01-10/20 (`vItem`), que a NT marca como implementação futura.
 - Regras que a própria NT marca como "implementação futura" (Imposto Seletivo, `vNFTot`, base de cálculo 1104) não estão implementadas.
 
 ## Atualizar as tabelas

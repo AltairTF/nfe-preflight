@@ -32,7 +32,7 @@ async function validate() {
       return show("bad", quota ? "Limite de validações do mês esgotado." : `Muitas validações seguidas. Tente de novo em ${wait || "alguns"} s.`, [], "");
     }
     if (!res.ok) return show("bad", ERRORS[res.status] || "Erro inesperado.", [], "");
-    show(body.valid ? "ok" : "bad", body.valid ? "Nenhum problema encontrado." : `${body.issues.length} problema(s) encontrado(s).`, body.issues, xml, body.valid);
+    show(body.valid ? "ok" : "bad", verdict(body.valid, body.issues), body.issues, xml, body.valid, new Date(), body.versions);
   } catch {
     show("bad", "Sem conexão com o servidor.", [], "");
   } finally {
@@ -40,13 +40,24 @@ async function validate() {
   }
 }
 
+// Issues with `vigencia` are rules that do not reject in production yet; they never make the XML invalid.
+function verdict(valid, issues) {
+  const future = issues.filter((i) => i.vigencia).length;
+  const now = issues.length - future;
+  if (valid) return future ? `Nenhum erro vigente. ${future} aviso(s) de regra que passa a valer em breve.` : "Nenhum problema encontrado.";
+  return `${now} erro(s) encontrado(s)` + (future ? ` e ${future} aviso(s) de regra futura.` : ".");
+}
+
 // Result of the last successful validation, used by the report buttons.
 let last = null;
 
-function show(kind, text, issues, xml, ok, at = new Date()) {
-  last = ok === undefined ? null : { valid: ok, issues, xml, at };
+function show(kind, text, issues, xml, ok, at = new Date(), versions) {
+  last = ok === undefined ? null : { valid: ok, issues, xml, at, versions };
   if (last && !restoring) remember(last);
   showStamp();
+  const v = $("versions");
+  v.hidden = !versions;
+  if (versions) v.textContent = `Validado com: schema ${versions.schema}; regras de negócio ${versions.rules}.`;
   $("report").hidden = !last;
   $("result").hidden = false;
   const s = $("summary");
@@ -56,8 +67,10 @@ function show(kind, text, issues, xml, ok, at = new Date()) {
   const list = $("issues");
   list.replaceChildren(...issues.map((i) => {
     const li = document.createElement("li");
-    const rule = Object.assign(document.createElement("span"), { className: "rule", textContent: i.rule });
+    const rule = Object.assign(document.createElement("span"), { className: i.vigencia ? "rule future" : "rule", textContent: i.rule });
     const msg = Object.assign(document.createElement("span"), { className: "msg", textContent: i.message });
+    // Path and rollout dates are built with textContent: the message can echo XML content.
+    for (const [cls, text] of [["path", i.path], ["vig", i.vigencia]]) if (text) msg.append(Object.assign(document.createElement("small"), { className: cls, textContent: text }));
     li.append(rule, msg);
     if (i.line) {
       const a = Object.assign(document.createElement("button"), { type: "button", className: "line", textContent: `linha ${i.line}` });
@@ -88,7 +101,7 @@ let restoring = false;
 
 // Storage can be blocked or full (2 MB XML); the page works the same without it.
 function remember(r) {
-  try { localStorage.setItem(KEY, JSON.stringify({ valid: r.valid, issues: r.issues, xml: r.xml, at: r.at.getTime() })); } catch {}
+  try { localStorage.setItem(KEY, JSON.stringify({ valid: r.valid, issues: r.issues, xml: r.xml, at: r.at.getTime(), versions: r.versions })); } catch {}
 }
 function forget() {
   try { localStorage.removeItem(KEY); } catch {}
@@ -128,7 +141,7 @@ function download(name, type, data) {
 function csv(r) {
   // A leading = + - @ would be run as a formula by spreadsheets, and the message can echo XML content.
   const cell = (v) => `"${String(v ?? "").replace(/^[=+\-@]/, "'$&").replace(/"/g, '""')}"`;
-  const rows = [["Regra", "Linha", "Mensagem"], ...r.issues.map((i) => [i.rule, i.line, i.message])];
+  const rows = [["Regra", "Situação", "Linha", "Caminho", "Mensagem", "Vigência"], ...r.issues.map((i) => [i.rule, i.vigencia ? "futuro" : "erro", i.line, i.path, i.message, i.vigencia])];
   return "\ufeff" + rows.map((row) => row.map(cell).join(";")).join("\r\n") + "\r\n";
 }
 
@@ -148,11 +161,14 @@ function pdf(r) {
     { t: "NF-e Preflight - Relatório de validação", f: 2, size: 16, gap: 8 },
     { t: `Data: ${when(r.at)}` },
     { t: `Chave de acesso: ${accessKey(r.xml)}` },
-    { t: r.valid ? "Resultado: nenhum problema encontrado." : `Resultado: ${r.issues.length} problema(s) encontrado(s).`, f: 2, gap: 8 },
+    ...(r.versions ? wrap(`Validado com: schema ${r.versions.schema}; regras ${r.versions.rules}.`, 95).map((t) => ({ t })) : []),
+    { t: `Resultado: ${verdict(r.valid, r.issues)}`, f: 2, gap: 8 },
   ];
   r.issues.forEach((i, n) => {
-    lines.push({ t: `${n + 1}. Regra ${i.rule}${i.line ? ` (linha ${i.line})` : ""}`, f: 2, gap: 4 });
+    lines.push({ t: `${n + 1}. ${i.vigencia ? "Aviso futuro" : "Regra"} ${i.rule}${i.line ? ` (linha ${i.line})` : ""}`, f: 2, gap: 4 });
     for (const w of wrap(i.message, 88)) lines.push({ t: w, x: 14 });
+    for (const w of wrap(i.path ? `Campo: ${i.path}` : "", 88)) lines.push({ t: w, x: 14, size: 8 });
+    for (const w of wrap(i.vigencia ?? "", 88)) lines.push({ t: w, x: 14, size: 9 });
   });
   wrap("Pré-teste: não verifica a assinatura digital nem o que a SEFAZ checa ao autorizar a nota. Não substitui a SEFAZ.", 95)
     .forEach((w, i) => lines.push({ t: w, size: 8, gap: i ? 0 : 12 }));
@@ -201,6 +217,6 @@ try {
   if (r && Array.isArray(r.issues) && typeof r.xml === "string") {
     restoring = true;
     $("xml").value = r.xml;
-    show(r.valid ? "ok" : "bad", r.valid ? "Nenhum problema encontrado." : `${r.issues.length} problema(s) encontrado(s).`, r.issues, r.xml, r.valid, new Date(r.at));
+    show(r.valid ? "ok" : "bad", verdict(r.valid, r.issues), r.issues, r.xml, r.valid, new Date(r.at), r.versions);
   }
 } catch {} finally { restoring = false; }

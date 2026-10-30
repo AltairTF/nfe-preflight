@@ -8,6 +8,10 @@ export interface Issue {
   rule: string;
   message: string;
   line?: number;
+  // Path of the failing element, e.g. NFe/infNFe/det[1]/imposto/IBSCBS/gIBSCBS/vIBS (business rules only; xmllint gives no path).
+  path?: string;
+  // Set only when the rule does not reject in production yet; says when it will. Such issues do not make the document invalid.
+  vigencia?: string;
 }
 
 // xmllint prints one "file:LINE: element X: Schemas validity error : MESSAGE" per problem.

@@ -106,7 +106,9 @@ test("1115: item without IBSCBS is rejected for CRT 3 from 03/08/2026, not befor
 test("real homologation XML (test/fixtures/real, anonymised) passes XSD and every rule", async () => {
   const real = readFileSync(new URL("./fixtures/real/xml-teste.xml", import.meta.url), "utf8");
   assert.deepEqual(await validateXsd(real), []);
-  assert.deepEqual(validateRules(real), []);
+  // The sample predates NT 2026.008, so only the undated "vProdLiq obrigatório" warning may remain.
+  assert.deepEqual(validateRules(real).filter((i) => !i.vigencia), []);
+  assert.deepEqual(codes(real), ["1278"]);
 });
 
 test("502/253: access key must match the fields and carry a valid check digit", () => {
@@ -116,4 +118,57 @@ test("502/253: access key must match the fields and carry a valid check digit", 
   const bad = key[43] === "0" ? "1" : "0";
   const badDv = valid.replaceAll(key, key.slice(0, 43) + bad).replace(`<cDV>${key[43]}</cDV>`, `<cDV>${bad}</cDV>`);
   assert.deepEqual(codes(badDv), ["253"]);
+});
+
+const D = (iso: string) => new Date(iso + "T12:00:00Z");
+const NOV = D("2026-11-10"); // after production start of NT 2026.008
+const OCT = D("2026-10-30"); // homologation only
+const run = (xml: string, now = NOV) => validateRules(xml, now);
+
+test("1279: vProdLiq must equal vUnComLiq x qCom (±0.01); error from 03/11/2026, future before", () => {
+  const bad = valid.replace("<vProdLiq>100.00", "<vProdLiq>99.00").replace("<vProdLiqTot>100.00", "<vProdLiqTot>99.00");
+  assert.deepEqual(run(bad).map((i) => i.rule), ["1279"]);
+  assert.equal(run(bad)[0].vigencia, undefined);
+  assert.equal(run(bad)[0].path, "NFe/infNFe/det[1]/prod/vProdLiq");
+  assert.match(run(bad, OCT)[0].vigencia!, /homologação desde 05\/10\/2026.*produção.*03\/11\/2026/);
+  assert.match(run(bad, D("2026-09-01"))[0].vigencia!, /homologação em 05\/10\/2026 e em produção em 03\/11\/2026/);
+  assert.deepEqual(run(valid.replace("<vProdLiq>100.00", "<vProdLiq>100.01").replace("<vProdLiqTot>100.00", "<vProdLiqTot>100.01")), []);
+});
+
+test("1278: missing vProdLiq is an error with no date defined yet", () => {
+  const xml = valid.replace(/<vUnComLiq>.*?<\/vProdLiq>/, "").replace(/<vProdLiqTot>.*?<\/vProdLiqTot>\s*/, "");
+  const [i] = run(xml);
+  assert.equal(i.rule, "1278");
+  assert.match(i.vigencia!, /ainda não definiu a data/);
+});
+
+test("1282/1283: vProdLiqTot required and equal to the sum of vProdLiq", () => {
+  assert.deepEqual(codes(valid.replace(/<vProdLiqTot>.*?<\/vProdLiqTot>\s*/, "")), ["1282"]);
+  const [i] = run(valid.replace("<vProdLiqTot>100.00", "<vProdLiqTot>100.01"));
+  assert.equal(i.rule, "1283");
+  assert.match(i.message, /informado 100\.01, soma dos itens 100\.00/);
+});
+
+test("1280/1281: ICMS previsto only in advance-payment notes; its absence is a 2027 error", () => {
+  const nb = "<ICMSPrevistoPagtoAntecip><vICMSPrevisto>1.00</vICMSPrevisto></ICMSPrevistoPagtoAntecip>";
+  const withNb = valid.replace("<ICMS><ICMSSN102><orig>0</orig><CSOSN>102</CSOSN></ICMSSN102></ICMS>", `<ICMS>${nb}</ICMS>`);
+  assert.deepEqual(codes(withNb), ["1280"]);
+  const adv = valid.replace("<finNFe>1</finNFe>", "<finNFe>6</finNFe><tpNFDebito>06</tpNFDebito>");
+  const missing = run(adv, NOV).find((i) => i.rule === "1281")!;
+  assert.match(missing.vigencia!, /homologação em 01\/02\/2027 e em produção em 01\/03\/2027/);
+  assert.equal(run(adv, D("2027-03-02")).find((i) => i.rule === "1281")!.vigencia, undefined);
+});
+
+test("1001: debit/credit notes carry no ICMS/PIS/...; tpNFDebito 07 and the NB01 group are exempt", () => {
+  const credit = valid.replace("<finNFe>1</finNFe>", "<finNFe>5</finNFe>");
+  assert.ok(codes(credit).includes("1001"));
+  assert.equal(run(credit).find((i) => i.rule === "1001")!.path, "NFe/infNFe/det[1]/imposto/ICMS");
+  assert.ok(!codes(valid.replace("<finNFe>1</finNFe>", "<finNFe>6</finNFe><tpNFDebito>07</tpNFDebito>")).includes("1001"));
+  assert.ok(!codes(credit.replace("<finNFe>5</finNFe>", "<finNFe>5</finNFe><tpNFCredito>04</tpNFCredito>")).includes("1001"));
+});
+
+test("totals: a one-cent gap says expected vs informed and hints at rateio", () => {
+  const i = validateRules(valid.replace("<vBCIBSCBS>100.00", "<vBCIBSCBS>100.01"))[0];
+  assert.equal(i.rule, "1076");
+  assert.match(i.message, /informado 100\.01, soma dos itens 100\.00, diferença 0\.01.*rateio/);
 });

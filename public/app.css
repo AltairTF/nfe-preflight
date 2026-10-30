@@ -43,6 +43,10 @@ ol { margin: 0; padding: 0; list-style: none; }
 #issues li:first-child { border-top: 0; }
 .rule { flex: none; min-width: 3.6em; padding: 0 6px; background: #8a1c1c; color: #fff; text-align: center; font: bold 12px Consolas, Menlo, monospace; }
 .msg { flex: 1; overflow-wrap: anywhere; }
+.rule.future { background: #8a6d00; }
+.msg small { display: block; margin-top: 2px; font-weight: normal; }
+.msg .path { color: #555; font: 12px Consolas, Menlo, monospace; }
+.msg .vig { color: #6b5300; }
 button.line { flex: none; font-size: 12px; }
 .code { max-height: 400px; overflow: auto; background: #fff; border: 1px solid #a9b0b8; font: 12px/1.45 Consolas, Menlo, "Courier New", monospace; }
 .code div { display: flex; white-space: pre; }

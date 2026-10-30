@@ -1,16 +1,39 @@
 import type { Issue } from "./xsd.ts";
 import tables from "./tables.json" with { type: "json" };
 
-// Business rules of NT 2025.002-RTC v1.52 (Setembro/2026), section 7. Each rule cites its RV id; `rule` is the SEFAZ rejection code.
+// Business rules of NT 2025.002-RTC v1.52 (Setembro/2026), section 7, and NT 2026.008 v1.00 (Valor Líquido do Produto). Each rule cites its RV id; `rule` is the SEFAZ rejection code.
 // CST/cClassTrib indicators come from tables.json, generated from IT 2025.002 v.1.70 by scripts/build-tables.py.
 const CST = tables.cst as Record<string, (typeof tables.cst)["000"]>;
 const CREDPRES = tables.cCredPres as Record<string, (typeof tables.cCredPres)["01"]>;
 const CCLASS = tables.cClassTrib as Record<string, (typeof tables.cClassTrib)["000001"]>;
 
+// Shown to the user so they know which layout and rules the verdict is based on.
+export const VERSIONS = {
+  schema: "Pacote de Liberação PL_010g v1.03 (NT 2026.006 v1.00 e NT 2026.008 v1.00, publicado em 26/10/2026)",
+  rules: "NT 2025.002-RTC v1.52 e NT 2026.008 v1.00",
+};
+
+// Rollout of a rule: ISO dates for homologation and production; `prod` undefined means the NT gives no date ("implementação futura").
+interface Rollout { nt: string; hom?: string; prod?: string }
+const NT008: Rollout = { nt: "NT 2026.008", hom: "2026-10-05", prod: "2026-11-03" };
+const NT008_NB01_30: Rollout = { nt: "NT 2026.008", hom: "2027-02-01", prod: "2027-03-01" };
+const NT008_NO_DATE: Rollout = { nt: "NT 2026.008" };
+const br = (d: string) => d.split("-").reverse().join("/");
+
+// Undefined when the rule already rejects in production at `today`, so the issue is a plain error.
+function vigencia(r: Rollout | undefined, today: string): string | undefined {
+  if (!r || (r.prod && today >= r.prod)) return undefined;
+  if (!r.prod) return `Erro futuro (${r.nt}): a SEFAZ ainda não definiu a data em que esta regra passa a valer.`;
+  if (r.hom && today >= r.hom)
+    return `Erro futuro em produção (${r.nt}): já rejeita em homologação desde ${br(r.hom)}; em produção passa a rejeitar em ${br(r.prod)}.`;
+  return `Erro futuro (${r.nt}): passa a rejeitar em homologação em ${br(r.hom ?? r.prod)} e em produção em ${br(r.prod)}.`;
+}
+
 interface Node {
   name: string;
   text: string;
   line: number;
+  path: string;
   nItem?: string;
   id?: string;
   kids: Node[];
@@ -18,7 +41,7 @@ interface Node {
 
 // shortcut: minimal parser for XML that already passed the XSD (no entities, CDATA or DOCTYPE); only used after validateXsd returns no issues.
 export function parse(xml: string): Node {
-  const root: Node = { name: "", text: "", line: 1, kids: [] };
+  const root: Node = { name: "", text: "", line: 1, path: "", kids: [] };
   const stack = [root];
   let line = 1;
   const re = /<!--[\s\S]*?-->|<\?[\s\S]*?\?>|<(\/?)([\w:.-]+)[^>]*?(\/?)>|([^<]+)/g;
@@ -26,7 +49,10 @@ export function parse(xml: string): Node {
     const [whole, close, name, self, text] = m;
     if (text !== undefined) stack.at(-1)!.text += text.trim();
     else if (name && !close) {
-      const n: Node = { name: name.replace(/^.*:/, ""), text: "", line, nItem: /nItem="(\d+)"/.exec(whole)?.[1], id: /\bId="([^"]*)"/.exec(whole)?.[1], kids: [] };
+      const local = name.replace(/^.*:/, "");
+      const nItem = /nItem="(\d+)"/.exec(whole)?.[1];
+      const parent = stack.at(-1)!;
+      const n: Node = { name: local, text: "", line, path: (parent.path ? parent.path + "/" : "") + local + (nItem ? `[${nItem}]` : ""), nItem, id: /\bId="([^"]*)"/.exec(whole)?.[1], kids: [] };
       stack.at(-1)!.kids.push(n);
       if (!self) stack.push(n);
     } else if (close) stack.pop();
@@ -67,12 +93,13 @@ export const accessKeyDv = (k43: string) => {
   return r < 2 ? "0" : String(11 - r);
 };
 
-export function validateRules(xml: string): Issue[] {
+export function validateRules(xml: string, now = new Date()): Issue[] {
+  const today = now.toISOString().slice(0, 10);
   const nfe = parse(xml);
   const inf = kid(nfe, "infNFe");
   const issues: Issue[] = [];
-  const add = (rule: string, n: Node | undefined, message: string, nItem?: string) =>
-    issues.push({ rule, line: n?.line, message: nItem ? `${message} [nItem: ${nItem}]` : message });
+  const add = (rule: string, n: Node | undefined, message: string, nItem?: string, rollout?: Rollout) =>
+    issues.push({ rule, line: n?.line, path: n?.path, message: nItem ? `${message} [nItem: ${nItem}]` : message, vigencia: vigencia(rollout, today) });
 
   const ide = kid(inf, "ide");
 
@@ -106,9 +133,29 @@ export function validateRules(xml: string): Issue[] {
   const sum: Record<string, number> = {};
   let anyItemIbsCbs = false;
   const seenZfm = new Set<string>();
+  const tpOperGov = path(ide, "gCompraGov/tpOperGov")?.text;
+  // NB01: ICMS previsto only in the advance-payment scenarios.
+  const advance = tpDeb === "06" || tpOperGov === "4";
+  let sumLiq = 0;
+  let anyLiq = false;
 
   for (const det of dets) {
     const nItem = det.nItem ?? "?";
+
+    // NT 2026.008: net value of the product (I11c) and ICMS previsto (NB01).
+    const prod = kid(det, "prod");
+    const vLiq = num(prod, "vProdLiq");
+    if (vLiq === undefined) add("1278", prod, "Rejeição: Valor Líquido do Produto não informado", nItem, NT008_NO_DATE);
+    else {
+      anyLiq = true;
+      sumLiq += cents(vLiq);
+      if (finNFe === "1" && !near((num(prod, "vUnComLiq") ?? 0) * (num(prod, "qCom") ?? 0), vLiq))
+        add("1279", kid(prod, "vProdLiq"), "Rejeição: Valor Líquido do Produto difere do calculado (vUnComLiq x qCom)", nItem, NT008);
+    }
+    const nb = path(det, "imposto/ICMS/ICMSPrevistoPagtoAntecip");
+    if (nb && (!model55 || !advance)) add("1280", nb, "Rejeição: Grupo do ICMS Previsto no Pagamento Antecipado informado indevidamente", nItem, NT008);
+    if (!nb && model55 && advance) add("1281", path(det, "imposto/ICMS") ?? det, "Rejeição: Grupo do ICMS Previsto no Pagamento Antecipado não informado", nItem, NT008_NB01_30);
+
     const ibscbs = path(det, "imposto/IBSCBS");
     if (!ibscbs) {
       if (required && !tables.cProdANPMonofasico.includes(all(det, "cProdANP")[0]?.text ?? "")) add("1115", path(det, "imposto") ?? det, "Rejeição: Grupo IBSCBS não informado", nItem);
@@ -284,6 +331,29 @@ export function validateRules(xml: string): Issue[] {
     }
   }
 
+  // B25-80 (NT 2026.008 version): debit/credit notes carry only IBS/CBS, except the listed cases.
+  // Exceções 2 and 3 (tpNFDebito 06) come from NT 2025.002 v1.52; exceção 4 is the NB01 group.
+  if (model55 && (finNFe === "5" || finNFe === "6" || tpOperGov === "2") && !["03", "04", "06"].includes(tpCred ?? "") && tpDeb !== "07") {
+    const adv06 = tpDeb === "06";
+    const found = dets.flatMap((d) =>
+      ["ICMS", "ISSQN", "IPI", "II", "PIS", "PISST", "COFINS", "COFINSST", "ICMSUFDest", "impostoDevol"]
+        .map((tag) => ({ tag, n: all(d, tag)[0], item: d.nItem }))
+        .filter(({ tag, n }) =>
+          n &&
+          !(tag === "ICMS" && n.kids.every((k) => k.name === "ICMSPrevistoPagtoAntecip")) &&
+          !(adv06 && tag === "IPI") &&
+          !(adv06 && year === 2026 && ["PIS", "PISST", "COFINS", "COFINSST"].includes(tag))),
+    )[0];
+    if (found) add("1001", found.n, `Rejeição: NF-e com finalidade de débito ou crédito somente para IBS/CBS (${found.tag} informado no item ${found.item})`, undefined, NT008);
+  }
+
+  // W01a-10 / W01a-20 (NT 2026.008)
+  const totalNode = kid(inf, "total");
+  const liqTot = num(totalNode, "vProdLiqTot");
+  if (anyLiq && liqTot === undefined) add("1282", totalNode, "Rejeição: Total Líquido não informado", undefined, NT008);
+  if (liqTot !== undefined && cents(liqTot) !== sumLiq)
+    add("1283", kid(totalNode, "vProdLiqTot"), `Rejeição: Total Líquido difere do somatório dos itens (informado ${liqTot.toFixed(2)}, soma dos itens ${(sumLiq / 100).toFixed(2)})`, undefined, NT008);
+
   // W34-10 / W34-20
   const tot = path(inf, "total/IBSCBSTot");
   if (tot && !anyItemIbsCbs) add("1118", tot, "Rejeição: Total de IBS e CBS informado indevidamente");
@@ -308,8 +378,12 @@ export function validateRules(xml: string): Issue[] {
     for (const [rule, p, expected, label] of checks) {
       const got = num(tot, p);
       // Totals are plain sums of the items, so no ±0.01 tolerance (W35..W56 do not grant one).
-      if (got !== undefined && cents(got) !== cents(expected ?? 0))
-        add(rule, path(tot, p), `Rejeição: ${label} difere da soma dos itens`);
+      if (got !== undefined && cents(got) !== cents(expected ?? 0)) {
+        const diff = cents(got) - cents(expected ?? 0);
+        // A few cents usually mean the total was computed on the whole and then spread over the items.
+        const hint = Math.abs(diff) <= 5 ? "; diferença de centavos costuma vir de rateio: o total deve ser a soma exata dos itens" : "";
+        add(rule, path(tot, p), `Rejeição: ${label} difere da soma dos itens (informado ${got.toFixed(2)}, soma dos itens ${(expected ?? 0).toFixed(2)}, diferença ${(diff / 100).toFixed(2)}${hint})`);
+      }
     }
   }
   return issues;
